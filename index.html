@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Andika Said — Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple: #534AB7;
+      --purple-light: #7F77DD;
+      --purple-pale: #EEEDFE;
+      --teal: #0F6E56;
+      --teal-mid: #1D9E75;
+      --teal-light: #5DCAA5;
+      --teal-pale: #E1F5EE;
+      --coral: #D85A30;
+      --coral-pale: #FAECE7;
+      --blue: #185FA5;
+      --blue-pale: #E6F1FB;
+      --amber: #BA7517;
+      --amber-pale: #FAEEDA;
+      --pink: #993556;
+      --pink-pale: #FBEAF0;
+      --dark: #0f0f1a;
+      --dark-2: #161625;
+      --text: #1a1a2e;
+      --text-muted: #666;
+      --text-faint: #999;
+      --border: #e0dff7;
+      --bg: #f8f7ff;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo span { color: var(--purple); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .nav-links a:hover { color: var(--purple); }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 6rem 2.5rem 5rem;
+      text-align: center;
+      background: var(--dark);
+      overflow: hidden;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #bgCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(83,74,183,0.25);
+      border: 0.5px solid var(--purple-light);
+      color: #AFA9EC;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 18px;
+      border-radius: 20px;
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.05em;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      letter-spacing: -1.5px;
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero h1 .h-purple { color: #AFA9EC; }
+    .hero h1 .h-teal { color: var(--teal-light); }
+    .hero-desc {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      max-width: 460px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      animation: fadeUp 0.8s ease both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp 0.9s ease both;
+    }
+    .btn-primary {
+      background: var(--purple);
+      color: #fff;
+      border: 2px solid var(--purple-light);
+      padding: 11px 28px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: #3C3489; transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: var(--teal-light);
+      border: 2px solid var(--teal-light);
+      padding: 11px 28px;
+      border-radius: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-outline:hover { background: rgba(93,202,165,0.12); transform: translateY(-1px); }
+
+    /* SECTIONS */
+    .section { padding: 4rem 2.5rem; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .section-label {
+      font-size: 11px;
+      color: var(--purple);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+    .bg-white { background: var(--white); }
+
+    /* SKILLS */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 15px;
+      border-radius: 20px;
+      cursor: default;
+      transition: transform 0.15s;
+      border: 0.5px solid transparent;
+    }
+    .skill-tag:hover { transform: translateY(-2px); }
+    .st-purple { background: var(--purple-pale); color: #3C3489; border-color: #AFA9EC; }
+    .st-teal   { background: var(--teal-pale);   color: #085041; border-color: #5DCAA5; }
+    .st-coral  { background: var(--coral-pale);  color: #712B13; border-color: #F0997B; }
+    .st-blue   { background: var(--blue-pale);   color: #0C447C; border-color: #85B7EB; }
+    .st-amber  { background: var(--amber-pale);  color: #633806; border-color: #EF9F27; }
+    .st-pink   { background: var(--pink-pale);   color: #72243E; border-color: #ED93B1; }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .project-card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-top-width: 3px;
+      border-top-style: solid;
+    }
+    .project-card:nth-child(1) { border-top-color: var(--purple); }
+    .project-card:nth-child(2) { border-top-color: var(--teal); }
+    .project-card:nth-child(3) { border-top-color: var(--coral); }
+    .project-card:nth-child(4) { border-top-color: var(--blue); }
+    .project-card:nth-child(5) { border-top-color: var(--pink); }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(83,74,183,0.12);
+    }
+    .proj-period {
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 4px;
+    }
+    .proj-company {
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 8px;
+    }
+    .proj-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .proj-desc { font-size: 12px; color: var(--text-muted); line-height: 1.65; }
+    .proj-tags { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+    .proj-tag {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 10px;
+      background: var(--bg);
+      color: var(--text-muted);
+      border: 0.5px solid var(--border);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-bottom: 0.5px solid #f0effe;
+    }
+    .exp-item:last-child { border-bottom: none; }
+    .exp-dot-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 5px;
+    }
+    .exp-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--purple);
+      flex-shrink: 0;
+    }
+    .exp-dot.teal { background: var(--teal); }
+    .exp-line {
+      width: 1.5px;
+      background: var(--border);
+      flex: 1;
+      margin-top: 5px;
+    }
+    .exp-content { flex: 1; }
+    .exp-date {
+      font-size: 11px;
+      color: var(--purple);
+      font-weight: 500;
+      margin-bottom: 5px;
+      letter-spacing: 0.03em;
+    }
+    .exp-date.teal { color: var(--teal); }
+    .exp-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .exp-sub { font-size: 12px; color: var(--text-faint); line-height: 1.6; }
+
+    /* CERTS */
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+    }
+    .cert-card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      border-left: 3px solid var(--purple);
+      transition: transform 0.15s;
+    }
+    .cert-card:hover { transform: translateY(-2px); }
+    .cert-card:nth-child(2) { border-left-color: var(--teal); }
+    .cert-card:nth-child(3) { border-left-color: var(--coral); }
+    .cert-card:nth-child(4) { border-left-color: var(--blue); }
+    .cert-card:nth-child(5) { border-left-color: var(--amber); }
+    .cert-card:nth-child(6) { border-left-color: var(--pink); }
+    .cert-card:nth-child(7) { border-left-color: var(--teal); }
+    .cert-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .cert-org { font-size: 11px; color: var(--purple); margin-bottom: 3px; font-weight: 500; }
+    .cert-date { font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
+    .cert-skills { display: flex; flex-wrap: wrap; gap: 4px; }
+    .cert-skill {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: var(--purple-pale);
+      color: #3C3489;
+    }
+
+    /* EDUCATION */
+    .edu-list { display: flex; flex-direction: column; gap: 18px; }
+    .edu-card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: 14px;
+      padding: 1.4rem 1.75rem;
+      display: flex;
+      gap: 1.4rem;
+      align-items: flex-start;
+      transition: transform 0.15s;
+    }
+    .edu-card:hover { transform: translateY(-2px); }
+    .edu-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .edu-badge.d3  { background: var(--purple-pale); color: #3C3489; }
+    .edu-badge.smk { background: var(--teal-pale);   color: #085041; }
+    .edu-content { flex: 1; }
+    .edu-school {
+      font-family: 'Syne', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+    .edu-prodi { font-size: 13px; color: var(--purple); font-weight: 500; margin-bottom: 3px; }
+    .edu-year  { font-size: 12px; color: var(--text-faint); }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--dark);
+      padding: 4.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section .section-label { color: #AFA9EC; }
+    .contact-section .section-title { color: #fff; margin-bottom: 0.5rem; }
+    .contact-desc { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 0.75rem; margin-top: 0.5rem; }
+    .contact-email { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 2rem; }
+    .contact-links { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .contact-btn {
+      background: rgba(255,255,255,0.08);
+      border: 0.5px solid rgba(255,255,255,0.2);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .contact-btn:hover { background: rgba(255,255,255,0.15); }
+
+    footer {
+      background: #0a0a14;
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 12px;
+      color: #444;
+      letter-spacing: 0.03em;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1rem; }
+      .section { padding: 3rem 1.25rem; }
+      .hero { padding: 4rem 1.25rem 3.5rem; }
+      .contact-section { padding: 3rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="#">andika<span>.</span>dev</a>
+    <ul class="nav-links">
+      <li><a href="#skills">skill</a></li>
+      <li><a href="#projects">proyek</a></li>
+      <li><a href="#experience">organisasi</a></li>
+      <li><a href="#contact">kontak</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <canvas id="bgCanvas"></canvas>
+    <div class="hero-inner">
+      <div class="hero-badge">tersedia untuk peluang baru</div>
+      <h1>
+        Halo, saya<br>
+        <span class="h-purple">Andika Said</span><br>
+        seorang <span class="h-teal">full stack developer</span>
+      </h1>
+      <p class="hero-desc">
+        Mahasiswa Manajemen Informatika Politeknik Astra yang berfokus pada pengembangan aplikasi web dan solusi teknologi inovatif.
+      </p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">lihat proyek saya</a>
+        <a href="#" class="btn-outline" onclick="alert('Ganti link ini dengan URL CV kamu!')">unduh cv</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="section-inner reveal">
+      <div class="section-label">kemampuan</div>
+      <div class="section-title">tech stack & skill</div>
+      <div class="skills-grid">
+        <span class="skill-tag st-purple">C#</span>
+        <span class="skill-tag st-purple">.NET MVC</span>
+        <span class="skill-tag st-coral">Java</span>
+        <span class="skill-tag st-amber">Python</span>
+        <span class="skill-tag st-amber">Streamlit</span>
+        <span class="skill-tag st-blue">Next.js</span>
+        <span class="skill-tag st-teal">Laravel</span>
+        <span class="skill-tag st-teal">SQL Server</span>
+        <span class="skill-tag st-coral">Android</span>
+        <span class="skill-tag st-blue">HTML / CSS</span>
+        <span class="skill-tag st-pink">Figma</span>
+        <span class="skill-tag st-purple">Networking</span>
+        <span class="skill-tag st-teal">SQL</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white" id="projects">
+    <div class="section-inner reveal">
+      <div class="section-label">portofolio</div>
+      <div class="section-title">proyek</div>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="proj-period">Mei – Okt 2025</div>
+          <div class="proj-company">PT GS Battery</div>
+          <div class="proj-title">GS Medical Care</div>
+          <div class="proj-desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">.NET MVC</span>
+            <span class="proj-tag">SQL Server</span>
+            <span class="proj-tag">OCR</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-period">Mei – Okt 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Chatbot ASKMI</div>
+          <div class="proj-desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Web</span>
+            <span class="proj-tag">Telegram API</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-period">Sep 2024 – Feb 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Chatbot & Cek Kelulusan PMB</div>
+          <div class="proj-desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Web</span>
+            <span class="proj-tag">Chatbot</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-period">Ongoing 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Inventory Control DSS</div>
+          <div class="proj-desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Streamlit</span>
+            <span class="proj-tag">DSS</span>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="proj-period">Mei – Jul 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Laundry System</div>
+          <div class="proj-desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Android</span>
+            <span class="proj-tag">SQLite</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="section-inner reveal">
+      <div class="section-label">perjalanan</div>
+      <div class="section-title">pengalaman organisasi</div>
+      <div class="exp-list">
+        <div class="exp-item">
+          <div class="exp-dot-col">
+            <div class="exp-dot teal"></div>
+            <div class="exp-line"></div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-date teal">Apr 2024 – Apr 2025</div>
+            <div class="exp-title">Kepala Departemen PHD — HIMMA Politeknik Astra</div>
+            <div class="exp-sub">Memimpin dan mengoordinasikan tim untuk mengelola strategi komunikasi, produksi konten kreatif, serta dokumentasi seluruh kegiatan organisasi. Menyusun rencana kerja departemen dan memastikan distribusi informasi berjalan efektif.</div>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-dot-col">
+            <div class="exp-dot"></div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-date">Nov 2023 – Nov 2024</div>
+            <div class="exp-title">Staff Departemen PHD — HIMMA Politeknik Astra</div>
+            <div class="exp-sub">Bertanggung jawab atas pendokumentasian kegiatan melalui fotografi dan videografi, editing aset visual, serta produksi konten kreatif untuk media sosial resmi organisasi.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-white" id="certs">
+    <div class="section-inner reveal">
+      <div class="section-label">sertifikasi</div>
+      <div class="section-title">pelatihan & sertifikat</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-name">Network Fundamental</div>
+          <div class="cert-org">Aguna Course</div>
+          <div class="cert-date">Sep 2025 · AC-555-23291893-72</div>
+          <div class="cert-skills">
+            <span class="cert-skill">Pengelolaan Jaringan</span>
+            <span class="cert-skill">Network Simulation</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Simulasi Jaringan dengan PNETLab</div>
+          <div class="cert-org">Aguna Course</div>
+          <div class="cert-date">Sep 2025 · AC-468-37822727-88</div>
+          <div class="cert-skills">
+            <span class="cert-skill">PNETLab</span>
+            <span class="cert-skill">Network Simulation</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">MikroTik Certified Network Associate</div>
+          <div class="cert-org">MikroTik</div>
+          <div class="cert-date">Des 2025 – Des 2028 · 2512NA1105</div>
+          <div class="cert-skills">
+            <span class="cert-skill">Jaringan Komputer</span>
+            <span class="cert-skill">MikroTik RouterOS</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Virtual Machine Fundamental</div>
+          <div class="cert-org">Aguna Course</div>
+          <div class="cert-date">Sep 2025 – Jan 2028</div>
+          <div class="cert-skills">
+            <span class="cert-skill">Virtual Machine</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Object-Oriented Programming (OOP)</div>
+          <div class="cert-org">ID-Networkers (IDN.ID)</div>
+          <div class="cert-date">Sep 2025 – Sep 2028</div>
+          <div class="cert-skills">
+            <span class="cert-skill">OOP</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Cisco Fundamental</div>
+          <div class="cert-org">ID-Networkers (IDN.ID)</div>
+          <div class="cert-date">Sep 2025 – Sep 2028</div>
+          <div class="cert-skills">
+            <span class="cert-skill">Cisco Fundamental</span>
+          </div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-name">Cyber Security</div>
+          <div class="cert-org">ID-Networkers (IDN.ID)</div>
+          <div class="cert-date">Sep 2025 – Sep 2028</div>
+          <div class="cert-skills">
+            <span class="cert-skill">Cyber Security</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="education">
+    <div class="section-inner reveal">
+      <div class="section-label">pendidikan</div>
+      <div class="section-title">riwayat pendidikan</div>
+      <div class="edu-list">
+        <div class="edu-card">
+          <div class="edu-badge d3">D3</div>
+          <div class="edu-content">
+            <div class="edu-school">Politeknik Astra</div>
+            <div class="edu-prodi">Manajemen Informatika</div>
+            <div class="edu-year">2023 – 2026 · Kabupaten Bekasi</div>
+          </div>
+        </div>
+        <div class="edu-card">
+          <div class="edu-badge smk">SMK</div>
+          <div class="edu-content">
+            <div class="edu-school">SMK Mitra Industri MM2100</div>
+            <div class="edu-prodi">Elektronika Industri</div>
+            <div class="edu-year">2020 – 2023 · Kabupaten Bekasi</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <div class="section-inner reveal">
+      <div class="section-label">kontak</div>
+      <div class="section-title">mari berkolaborasi</div>
+      <p class="contact-desc">Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.</p>
+      <p class="contact-email">andikasaid88@gmail.com &nbsp;·&nbsp; 089523921454</p>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/andika-said-413289326" target="_blank" class="contact-btn">LinkedIn</a>
+        <a href="https://github.com/andikasaid" target="_blank" class="contact-btn">GitHub</a>
+        <a href="https://instagram.com/andhsayyeid" target="_blank" class="contact-btn">Instagram</a>
+        <a href="mailto:andikasaid88@gmail.com" class="contact-btn">Email</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>dibuat oleh Andika Said &nbsp;·&nbsp; 2025</footer>
+
+  <script>
+    // Animated code background
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    function resizeCanvas() {
+      canvas.width = canvas.parentElement.offsetWidth;
+      canvas.height = canvas.parentElement.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const snippets = [
+      'const app = express();',
+      'SELECT * FROM users',
+      'def predict(df):',
+      'import streamlit as st',
+      '@app.route("/api")',
+      'git commit -m "init"',
+      'npm run build',
+      'return response.json()',
+      'useState(null)',
+      'WHERE id = ?',
+      'public class Main {',
+      'async function fetch()',
+      'border-radius: 8px;',
+      'docker-compose up',
+      '.then(res => res.json())',
+      'CREATE TABLE users',
+      'console.log(data)',
+      'if (err) throw err;',
+      'class Model extends db',
+      'pip install -r req.txt',
+      '<div class="container">',
+      'router.get("/", fn)',
+    ];
+
+    const particles = Array.from({length: 30}, () => ({
+      x: Math.random() * 1400,
+      y: Math.random() * 600,
+      speed: 0.25 + Math.random() * 0.45,
+      text: snippets[Math.floor(Math.random() * snippets.length)],
+      opacity: 0.05 + Math.random() * 0.1,
+      size: 10 + Math.random() * 3,
+    }));
+
+    function drawBg() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        ctx.globalAlpha = p.opacity;
+        ctx.fillStyle = '#a0a8ff';
+        ctx.font = `${p.size}px monospace`;
+        ctx.fillText(p.text, p.x, p.y);
+        p.y += p.speed;
+        if (p.y > canvas.height + 30) {
+          p.y = -20;
+          p.x = Math.random() * canvas.width;
+          p.text = snippets[Math.floor(Math.random() * snippets.length)];
+        }
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(drawBg);
+    }
+    drawBg();
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
