@@ -375,6 +375,26 @@
       border: 0.5px solid transparent;
     }
     .skill-tag:hover { transform: translateY(-2px); }
+    .skills-categories { display: flex; flex-direction: column; gap: 24px; }
+    .skill-cat-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .skill-cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-purple { background: var(--purple); }
+    .dot-teal   { background: var(--teal); }
+    .dot-coral  { background: var(--coral); }
+    .dot-blue   { background: var(--blue); }
+    .dot-amber  { background: var(--amber); }
+    .dot-pink   { background: var(--pink); }
     .st-purple { background: var(--purple-pale); color: #3C3489; border-color: #AFA9EC; }
     .st-teal   { background: var(--teal-pale);   color: #085041; border-color: #5DCAA5; }
     .st-coral  { background: var(--coral-pale);  color: #712B13; border-color: #F0997B; }
@@ -728,20 +748,144 @@
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="skills.label">kemampuan</div>
       <div class="section-title" data-i18n="skills.title">tech stack & skill</div>
-      <div class="skills-grid">
-        <span class="skill-tag st-purple">C#</span>
-        <span class="skill-tag st-purple">.NET MVC</span>
-        <span class="skill-tag st-coral">Java</span>
-        <span class="skill-tag st-amber">Python</span>
-        <span class="skill-tag st-amber">Streamlit</span>
-        <span class="skill-tag st-blue">Next.js</span>
-        <span class="skill-tag st-teal">Laravel</span>
-        <span class="skill-tag st-teal">SQL Server</span>
-        <span class="skill-tag st-coral">Android</span>
-        <span class="skill-tag st-blue">HTML / CSS</span>
-        <span class="skill-tag st-pink">Figma</span>
-        <span class="skill-tag st-purple">Networking</span>
-        <span class="skill-tag st-teal">SQL</span>
+
+      <div class="skills-categories">
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-blue"></span><span data-i18n="skills.cat.frontend">Frontend</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-blue">HTML</span>
+            <span class="skill-tag st-blue">CSS</span>
+            <span class="skill-tag st-purple">C#</span>
+            <span class="skill-tag st-amber">JavaScript</span>
+            <span class="skill-tag st-blue">TypeScript</span>
+            <span class="skill-tag st-teal">React</span>
+            <span class="skill-tag st-blue">Next.js</span>
+            <span class="skill-tag st-coral">Angular</span>
+            <span class="skill-tag st-pink">Svelte</span>
+            <span class="skill-tag st-teal">Tailwind CSS</span>
+            <span class="skill-tag st-purple">Bootstrap</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-purple"></span><span data-i18n="skills.cat.backend">Backend</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-purple">PHP</span>
+            <span class="skill-tag st-teal">Laravel</span>
+            <span class="skill-tag st-blue">CodeIgniter</span>
+            <span class="skill-tag st-purple">C#</span>
+            <span class="skill-tag st-purple">.NET / .NET Core / .NET MVC</span>
+            <span class="skill-tag st-purple">ASP.NET</span>
+            <span class="skill-tag st-coral">Java</span>
+            <span class="skill-tag st-coral">Spring Boot</span>
+            <span class="skill-tag st-amber">Python</span>
+            <span class="skill-tag st-amber">Streamlit</span>
+            <span class="skill-tag st-teal">Node.js</span>
+            <span class="skill-tag st-teal">Express.js</span>
+            <span class="skill-tag st-teal">NestJS</span>
+            <span class="skill-tag st-pink">REST API</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-teal"></span><span data-i18n="skills.cat.database">Database</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-teal">MySQL</span>
+            <span class="skill-tag st-teal">SQL Server</span>
+            <span class="skill-tag st-teal">SQLite</span>
+            <span class="skill-tag st-amber">Firebase Realtime DB/Firestore</span>
+            <span class="skill-tag st-purple">phpMyAdmin</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-coral"></span><span data-i18n="skills.cat.mobile">Mobile</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-coral">Android (Java/Kotlin)</span>
+            <span class="skill-tag st-blue">Flutter</span>
+            <span class="skill-tag st-teal">React Native</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-amber"></span><span data-i18n="skills.cat.networking">Networking</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-purple">Networking Dasar</span>
+            <span class="skill-tag st-blue">TCP/IP</span>
+            <span class="skill-tag st-blue">Subnetting</span>
+            <span class="skill-tag st-teal">VLAN</span>
+            <span class="skill-tag st-teal">Routing & Switching</span>
+            <span class="skill-tag st-coral">Cisco (CCNA-level)</span>
+            <span class="skill-tag st-amber">MikroTik RouterOS</span>
+            <span class="skill-tag st-pink">PNETLab</span>
+            <span class="skill-tag st-pink">GNS3</span>
+            <span class="skill-tag st-purple">Wireshark</span>
+            <span class="skill-tag st-coral">Firewall</span>
+            <span class="skill-tag st-coral">VPN</span>
+            <span class="skill-tag st-amber">Cyber Security Dasar</span>
+            <span class="skill-tag st-teal">Linux Server</span>
+            <span class="skill-tag st-blue">DNS/DHCP</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-pink"></span><span data-i18n="skills.cat.design">Design / UI</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-pink">Figma</span>
+            <span class="skill-tag st-blue">Canva</span>
+            <span class="skill-tag st-purple">Photoshop</span>
+            <span class="skill-tag st-teal">UI/UX Wireframing</span>
+            <span class="skill-tag st-amber">Prototyping</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-teal"></span><span data-i18n="skills.cat.editor">Editor / Tools</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-purple">Visual Studio</span>
+            <span class="skill-tag st-blue">VS Code</span>
+            <span class="skill-tag st-coral">Android Studio</span>
+            <span class="skill-tag st-coral">IntelliJ IDEA</span>
+            <span class="skill-tag st-purple">Git</span>
+            <span class="skill-tag st-purple">GitHub</span>
+            <span class="skill-tag st-amber">Postman</span>
+            <span class="skill-tag st-teal">XAMPP</span>
+            <span class="skill-tag st-blue">Vercel</span>
+            <span class="skill-tag st-blue">Netlify</span>
+            <span class="skill-tag st-pink">Jira</span>
+            <span class="skill-tag st-pink">Trello</span>
+            <span class="skill-tag st-amber">Notion</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-blue"></span><span data-i18n="skills.cat.office">Office</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-purple">Microsoft Word</span>
+            <span class="skill-tag st-teal">Microsoft Excel</span>
+            <span class="skill-tag st-coral">Microsoft PowerPoint</span>
+            <span class="skill-tag st-blue">Microsoft Outlook</span>
+            <span class="skill-tag st-amber">Microsoft Access</span>
+            <span class="skill-tag st-blue">Google Docs</span>
+            <span class="skill-tag st-amber">Google Sheets</span>
+            <span class="skill-tag st-pink">Google Slides</span>
+            <span class="skill-tag st-teal">Google Forms</span>
+            <span class="skill-tag st-coral">Power BI</span>
+          </div>
+        </div>
+
+        <div class="skill-cat">
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-coral"></span><span data-i18n="skills.cat.data">Data / Analyst</span></div>
+          <div class="skills-grid">
+            <span class="skill-tag st-amber">Pandas</span>
+            <span class="skill-tag st-amber">NumPy</span>
+            <span class="skill-tag st-coral">Power BI</span>
+            <span class="skill-tag st-teal">Streamlit Dashboard</span>
+            <span class="skill-tag st-blue">Basic Data Visualization</span>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1446,6 +1590,15 @@
 
       'skills.label': { id: 'kemampuan', en: 'skills' },
       'skills.title': { id: 'tech stack & skill', en: 'tech stack & skills' },
+      'skills.cat.frontend':   { id: 'Frontend',       en: 'Frontend' },
+      'skills.cat.backend':    { id: 'Backend',        en: 'Backend' },
+      'skills.cat.database':   { id: 'Database',       en: 'Database' },
+      'skills.cat.mobile':     { id: 'Mobile',         en: 'Mobile' },
+      'skills.cat.networking': { id: 'Networking',      en: 'Networking' },
+      'skills.cat.design':     { id: 'Design / UI',    en: 'Design / UI' },
+      'skills.cat.editor':     { id: 'Editor / Tools', en: 'Editor / Tools' },
+      'skills.cat.office':     { id: 'Office',         en: 'Office' },
+      'skills.cat.data':       { id: 'Data / Analyst', en: 'Data / Analyst' },
 
       'projects.label': { id: 'portofolio', en: 'portfolio' },
       'projects.title': { id: 'proyek', en: 'projects' },
