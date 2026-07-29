@@ -9,12 +9,14 @@
   <meta name="keywords" content="Andika Said, Full Stack Developer, Web Developer, Politeknik Astra, Manajemen Informatika, .NET, Laravel, Next.js, Python, Android" />
   <meta name="author" content="Andika Said" />
   <meta name="robots" content="index, follow" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23534AB7'/%3E%3Ctext x='50' y='68' font-size='52' font-family='Georgia,serif' font-weight='700' fill='white' text-anchor='middle'%3EAS%3C/text%3E%3C/svg%3E" />
   <link rel="canonical" href="https://andikasaid.github.io" />
 
   <meta property="og:title" content="Andika Said — Full Stack Developer" />
   <meta property="og:description" content="Mahasiswa Manajemen Informatika Politeknik Astra yang berfokus pada pengembangan aplikasi web dan solusi teknologi inovatif." />
   <meta property="og:url" content="https://andikasaid.github.io" />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://andikasaid.github.io/assets/og-image.png" />
   <meta property="og:locale" content="id_ID" />
 
   <script type="application/ld+json">
@@ -301,6 +303,14 @@
     @media (max-width: 600px) {
       .highlights-section { padding: 2rem 1.25rem 2.5rem; }
       .highlight-number { font-size: 26px; }
+    }
+
+    .about-section { padding-top: 0; }
+    .about-text {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.85;
+      max-width: 680px;
     }
 
     .metal-btn-wrapper {
@@ -727,12 +737,12 @@
   </div>
 
   <nav class="navbar-float" id="mainNav">
-    <a href="#skills"      class="nav-link active" data-section="skills">
+    <a href="#projects"    class="nav-link active" data-section="projects">
       <span class="nav-indicator"></span>
       <span class="nav-lamp"></span>
-      <span data-i18n="nav.skills">skill</span>
+      <span data-i18n="nav.projects">proyek</span>
     </a>
-    <a href="#projects"    class="nav-link" data-section="projects"><span data-i18n="nav.projects">proyek</span></a>
+    <a href="#skills"      class="nav-link" data-section="skills"><span data-i18n="nav.skills">skill</span></a>
     <a href="#experience"  class="nav-link" data-section="experience"><span data-i18n="nav.experience">organisasi</span></a>
     <a href="#contact"     class="nav-link" data-section="contact"><span data-i18n="nav.contact">kontak</span></a>
   </nav>
@@ -788,6 +798,102 @@
           <div class="highlight-number">2 <span class="highlight-unit" data-i18n="highlights.yearsUnit">Tahun</span></div>
           <div class="highlight-label" data-i18n="highlights.org">Pengalaman Organisasi</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section about-section">
+    <div class="section-inner reveal">
+      <div class="section-label" data-i18n="about.label">tentang saya</div>
+      <p class="about-text" data-i18n="about.text">
+        Saya senang membangun sesuatu dari nol — mulai dari merancang alur sistem, menulis kode backend, sampai memastikan tampilannya enak dipakai. Ketertarikan saya di full stack development tumbuh dari pengalaman langsung mengerjakan sistem yang benar-benar dipakai perusahaan dan organisasi, bukan sekadar tugas kuliah — dan dari situ saya belajar bahwa kode yang baik adalah kode yang menyelesaikan masalah nyata.
+      </p>
+    </div>
+  </section>
+
+  <section class="section bg-white" id="projects">
+    <div class="section-inner reveal">
+      <div class="section-label" data-i18n="projects.label">portofolio</div>
+      <div class="section-title" data-i18n="projects.title">proyek</div>
+      <div class="projects-grid">
+
+        <div class="project-card" data-proof="gs-medical-care">
+          <div class="proj-period">Mei – Okt 2025</div>
+          <div class="proj-company">PT GS Battery</div>
+          <div class="proj-title">GS Medical Care</div>
+          <div class="proj-desc" data-i18n="proj.gsmedical.desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">.NET MVC</span>
+            <span class="proj-tag">SQL Server</span>
+            <span class="proj-tag">OCR</span>
+          </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="gs-medical-care">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
+        </div>
+
+        <div class="project-card" data-proof="chatbot-askmi">
+          <div class="proj-period">Mei – Okt 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Chatbot ASKMI</div>
+          <div class="proj-desc" data-i18n="proj.askmi.desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Web</span>
+            <span class="proj-tag">Telegram API</span>
+          </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="chatbot-askmi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
+        </div>
+
+        <div class="project-card" data-proof="pmb-chatbot">
+          <div class="proj-period">Sep 2024 – Feb 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Chatbot & Cek Kelulusan PMB</div>
+          <div class="proj-desc" data-i18n="proj.pmb.desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Web</span>
+            <span class="proj-tag">Chatbot</span>
+          </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="pmb-chatbot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
+        </div>
+
+        <div class="project-card" data-proof="inventory-dss">
+          <div class="proj-period">Ongoing 2026</div>
+          <div class="proj-company">PT Suryaraya Rubberindo Industries</div>
+          <div class="proj-title">Inventory Control DSS</div>
+          <div class="proj-desc" data-i18n="proj.dss.desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">Streamlit</span>
+            <span class="proj-tag">DSS</span>
+          </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="inventory-dss">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
+        </div>
+
+        <div class="project-card" data-proof="laundry-system">
+          <div class="proj-period">Mei – Jul 2025</div>
+          <div class="proj-company">Politeknik Astra</div>
+          <div class="proj-title">Laundry System</div>
+          <div class="proj-desc" data-i18n="proj.laundry.desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
+          <div class="proj-tags">
+            <span class="proj-tag">Android</span>
+            <span class="proj-tag">SQLite</span>
+          </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="laundry-system">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </section>
@@ -938,94 +1044,7 @@
     </div>
   </section>
 
-  <section class="section bg-white" id="projects">
-    <div class="section-inner reveal">
-      <div class="section-label" data-i18n="projects.label">portofolio</div>
-      <div class="section-title" data-i18n="projects.title">proyek</div>
-      <div class="projects-grid">
-
-        <div class="project-card" data-proof="gs-medical-care">
-          <div class="proj-period">Mei – Okt 2025</div>
-          <div class="proj-company">PT GS Battery</div>
-          <div class="proj-title">GS Medical Care</div>
-          <div class="proj-desc" data-i18n="proj.gsmedical.desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">.NET MVC</span>
-            <span class="proj-tag">SQL Server</span>
-            <span class="proj-tag">OCR</span>
-          </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="gs-medical-care">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
-        </div>
-
-        <div class="project-card" data-proof="chatbot-askmi">
-          <div class="proj-period">Mei – Okt 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Chatbot ASKMI</div>
-          <div class="proj-desc" data-i18n="proj.askmi.desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Web</span>
-            <span class="proj-tag">Telegram API</span>
-          </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="chatbot-askmi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
-        </div>
-
-        <div class="project-card" data-proof="pmb-chatbot">
-          <div class="proj-period">Sep 2024 – Feb 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Chatbot & Cek Kelulusan PMB</div>
-          <div class="proj-desc" data-i18n="proj.pmb.desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Web</span>
-            <span class="proj-tag">Chatbot</span>
-          </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="pmb-chatbot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
-        </div>
-
-        <div class="project-card" data-proof="inventory-dss">
-          <div class="proj-period">Ongoing 2026</div>
-          <div class="proj-company">PT Suryaraya Rubberindo Industries</div>
-          <div class="proj-title">Inventory Control DSS</div>
-          <div class="proj-desc" data-i18n="proj.dss.desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">Streamlit</span>
-            <span class="proj-tag">DSS</span>
-          </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="inventory-dss">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
-        </div>
-
-        <div class="project-card" data-proof="laundry-system">
-          <div class="proj-period">Mei – Jul 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Laundry System</div>
-          <div class="proj-desc" data-i18n="proj.laundry.desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Android</span>
-            <span class="proj-tag">SQLite</span>
-          </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="laundry-system">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="experience">
+  <section class="section bg-white" id="experience">
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="exp.label">perjalanan</div>
       <div class="section-title" data-i18n="exp.title">pengalaman organisasi</div>
@@ -1055,7 +1074,7 @@
     </div>
   </section>
 
-  <section class="section bg-white" id="certs">
+  <section class="section" id="certs">
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="certs.label">sertifikasi</div>
       <div class="section-title" data-i18n="certs.title">pelatihan & sertifikat</div>
@@ -1113,7 +1132,7 @@
     </div>
   </section>
 
-  <section class="section" id="education">
+  <section class="section bg-white" id="education">
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="edu.label">pendidikan</div>
       <div class="section-title" data-i18n="edu.title">riwayat pendidikan</div>
@@ -1153,7 +1172,7 @@
     </div>
   </section>
 
-  <footer><span data-i18n="footer.made">dibuat oleh Andika Said</span> &nbsp;·&nbsp; 2025</footer>
+  <footer><span data-i18n="footer.made">dibuat oleh Andika Said</span> &nbsp;·&nbsp; <span data-i18n="footer.updated">terakhir diperbarui Juli 2026</span></footer>
 
   <div class="proof-overlay" id="proofOverlay">
     <div class="proof-modal" id="proofModal">
@@ -1385,8 +1404,8 @@
         eyebrow: { id: 'PT GS Battery · Mei – Okt 2025', en: 'PT GS Battery · May – Oct 2025' },
         title: 'GS Medical Care',
         desc: {
-          id: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR untuk digitalisasi dokumen, unggahan data massal via Excel, serta dasbor analitik kesehatan interaktif untuk tim HR & medis.',
-          en: 'A web app for employee MCU and medical record management, featuring OCR for document digitization, bulk data upload via Excel, and an interactive health analytics dashboard for HR and medical teams.'
+          id: 'Merancang dan mengembangkan sistem manajemen MCU dan rekam medis karyawan berbasis .NET MVC, dengan fokus pada efisiensi proses administrasi kesehatan perusahaan. Membangun modul OCR untuk digitalisasi dokumen fisik, fitur unggah data massal melalui Excel untuk mempercepat input data, serta dasbor analitik interaktif yang membantu tim HR dan medis memantau tren kesehatan karyawan secara real-time. Digunakan secara aktif untuk mendukung operasional kesehatan lintas departemen.',
+          en: 'Designed and developed an employee MCU and medical record management system using .NET MVC, focused on streamlining corporate health administration. Built an OCR module for digitizing physical documents, a bulk Excel upload feature to speed up data entry, and an interactive analytics dashboard that helps HR and medical teams monitor employee health trends in real time. Actively used to support cross-departmental health operations.'
         },
         tags: ['.NET MVC', 'SQL Server', 'OCR'],
         images: [
@@ -1401,8 +1420,8 @@
         eyebrow: { id: 'Politeknik Astra · Mei – Okt 2025', en: 'Politeknik Astra · May – Oct 2025' },
         title: 'Chatbot ASKMI',
         desc: {
-          id: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario percakapan interaktif, dan otomasi kegiatan organisasi kemahasiswaan.',
-          en: 'A web-based Telegram bot management platform with custom message scheduling, interactive conversation scenarios, and automation for student-organization activities.'
+          id: 'Mengembangkan platform manajemen bot Telegram berbasis web untuk mendukung kegiatan organisasi kemahasiswaan HIMMA. Fitur utamanya mencakup penjadwalan pesan otomatis, skenario percakapan interaktif untuk menjawab pertanyaan anggota, serta panel manajemen yang memudahkan pengurus mengatur konten dan jadwal publikasi tanpa perlu mengedit kode. Membantu organisasi menghemat waktu dalam penyampaian informasi rutin ke seluruh anggota.',
+          en: 'Developed a web-based Telegram bot management platform to support HIMMA student organization activities. Key features include automated message scheduling, interactive conversation scenarios to answer member questions, and a management panel that lets committee members handle content and publishing schedules without touching code. Helped the organization save time in delivering routine information to all members.'
         },
         tags: ['Web', 'Telegram API'],
         images: [
@@ -1416,8 +1435,8 @@
         eyebrow: { id: 'Politeknik Astra · Sep 2024 – Feb 2025', en: 'Politeknik Astra · Sep 2024 – Feb 2025' },
         title: 'Chatbot & Cek Kelulusan PMB',
         desc: {
-          id: 'Sistem web terintegrasi yang memudahkan calon mahasiswa mengakses informasi pendaftaran dan memeriksa status kelulusan secara real-time melalui chatbot.',
-          en: 'An integrated web system that lets prospective students access admission information and check acceptance status in real time via chatbot.'
+          id: 'Mengembangkan sistem web terintegrasi dengan chatbot untuk mendukung proses Penerimaan Mahasiswa Baru (PMB), memungkinkan calon mahasiswa mengakses informasi pendaftaran dan memeriksa status kelulusan secara mandiri dan real-time. Sistem ini dirancang untuk mengurangi beban kerja tim admisi dalam menjawab pertanyaan berulang, sekaligus mempercepat alur informasi ke calon mahasiswa selama periode pendaftaran.',
+          en: "Developed an integrated web system with a chatbot to support the New Student Admission (PMB) process, allowing prospective students to access registration information and check acceptance status independently and in real time. The system was designed to reduce the admissions team's workload from repetitive inquiries while speeding up information delivery to applicants during the registration period."
         },
         tags: ['Web', 'Chatbot'],
         images: [
@@ -1431,8 +1450,8 @@
         eyebrow: { id: 'PT Suryaraya Rubberindo Industries · Ongoing 2026', en: 'PT Suryaraya Rubberindo Industries · Ongoing 2026' },
         title: 'Inventory Control DSS',
         desc: {
-          id: 'Decision Support System berbasis Python dan Streamlit untuk membantu tim produksi mengoptimalkan manajemen stok dan menjaga stabilitas produksi.',
-          en: 'A Python and Streamlit-based Decision Support System that helps the production team optimize stock management and maintain production stability.'
+          id: 'Membangun Decision Support System berbasis Python dan Streamlit untuk membantu tim produksi dalam pengambilan keputusan terkait manajemen stok bahan baku. Sistem ini mengolah data historis produksi menjadi rekomendasi yang mudah dipahami melalui visualisasi interaktif, dengan tujuan menjaga stabilitas alur produksi dan mengurangi risiko kekurangan maupun kelebihan stok. Proyek masih berjalan hingga saat ini (2026).',
+          en: 'Built a Python and Streamlit-based Decision Support System to help the production team make informed decisions on raw material stock management. The system processes historical production data into easy-to-understand recommendations through interactive visualizations, aiming to maintain production stability and reduce the risk of stock shortages or overages. The project is ongoing as of 2026.'
         },
         tags: ['Python', 'Streamlit', 'DSS'],
         images: [
@@ -1446,8 +1465,8 @@
         eyebrow: { id: 'Politeknik Astra · Mei – Jul 2025', en: 'Politeknik Astra · May – Jul 2025' },
         title: 'Laundry System',
         desc: {
-          id: 'Aplikasi Android fungsional untuk manajemen layanan laundry dan pencatatan transaksi menggunakan basis data lokal SQLite.',
-          en: 'A functional Android app for managing laundry services and recording transactions using a local SQLite database.'
+          id: 'Mengembangkan aplikasi Android untuk manajemen operasional layanan laundry, mencakup pencatatan transaksi pelanggan, status cucian, dan riwayat pesanan menggunakan basis data lokal SQLite. Dirancang agar bisa dipakai langsung oleh pemilik usaha kecil tanpa memerlukan koneksi internet, mempermudah pencatatan yang sebelumnya dilakukan secara manual di buku.',
+          en: 'Developed an Android application for managing laundry service operations, including customer transaction records, laundry status tracking, and order history using a local SQLite database. Designed for direct use by small business owners without requiring an internet connection, replacing what was previously a manual paper-based recording process.'
         },
         tags: ['Android', 'SQLite'],
         images: [
@@ -1626,6 +1645,12 @@
       'hero.cta1': { id: 'lihat proyek saya', en: 'view my projects' },
       'hero.cta2': { id: 'unduh cv', en: 'download cv' },
 
+      'about.label': { id: 'tentang saya', en: 'about me' },
+      'about.text': {
+        id: 'Saya senang membangun sesuatu dari nol — mulai dari merancang alur sistem, menulis kode backend, sampai memastikan tampilannya enak dipakai. Ketertarikan saya di full stack development tumbuh dari pengalaman langsung mengerjakan sistem yang benar-benar dipakai perusahaan dan organisasi, bukan sekadar tugas kuliah — dan dari situ saya belajar bahwa kode yang baik adalah kode yang menyelesaikan masalah nyata.',
+        en: "I enjoy building things from scratch — from designing system flows and writing backend logic, to making sure the final product feels good to use. My interest in full stack development grew from hands-on experience working on systems actually used by companies and organizations, not just coursework — and that's where I learned that good code is code that solves a real problem."
+      },
+
       'skills.label': { id: 'kemampuan', en: 'skills' },
       'skills.title': { id: 'tech stack & skill', en: 'tech stack & skills' },
       'skills.cat.frontend':   { id: 'Frontend',       en: 'Frontend' },
@@ -1666,6 +1691,7 @@
       'contact.desc': { id: 'Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.', en: 'Open to job opportunities, internships, and project collaborations.' },
 
       'footer.made': { id: 'dibuat oleh Andika Said', en: 'made by Andika Said' },
+      'footer.updated': { id: 'terakhir diperbarui Juli 2026', en: 'last updated July 2026' },
 
       'highlights.projects':  { id: 'Proyek Selesai',           en: 'Projects Completed' },
       'highlights.certs':     { id: 'Sertifikasi Profesional',  en: 'Professional Certifications' },
