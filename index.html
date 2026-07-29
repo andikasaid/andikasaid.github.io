@@ -86,7 +86,6 @@
       overflow-x: hidden;
     }
 
-    /* ===== FLOATING NAVBAR (adapted from NavBar component) ===== */
     .navbar-float {
       position: fixed;
       bottom: 24px;
@@ -149,10 +148,42 @@
       filter: blur(6px);
     }
 
-    /* ===== EFFECT TOGGLE (demo.tsx activeEffect) ===== */
+    .lang-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 210;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      background: rgba(15, 15, 26, 0.7);
+      border: 0.5px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 4px;
+      border-radius: 30px;
+      box-shadow: 0 8px 32px rgba(83, 74, 183, 0.2);
+    }
+    .lang-btn {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 13px;
+      border-radius: 24px;
+      border: none;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.55);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .lang-btn.active {
+      background: rgba(83, 74, 183, 0.55);
+      color: #fff;
+    }
+
     .fx-toggle {
       position: absolute;
-      top: 18px; right: 18px;
+      top: 18px; left: 18px;
       z-index: 10;
       display: flex; gap: 6px;
     }
@@ -172,7 +203,6 @@
     }
     .fx-btn:hover { color: #fff; }
 
-    /* ===== HERO ===== */
     .hero {
       position: relative;
       padding: 6rem 2.5rem 7rem;
@@ -238,7 +268,6 @@
       animation: fadeUp 0.9s ease both;
     }
 
-    /* ===== METAL BUTTON (adapted from MetalButton component) ===== */
     .metal-btn-wrapper {
       position: relative;
       display: inline-flex;
@@ -289,7 +318,6 @@
     }
     .metal-btn-wrapper:active .metal-btn { transform: scale(0.97); }
 
-    /* ===== LIQUID BUTTON (adapted from LiquidButton component) ===== */
     .liquid-btn {
       position: relative;
       display: inline-flex;
@@ -316,7 +344,6 @@
     }
     .liquid-btn span { position: relative; z-index: 2; }
 
-    /* ===== SECTIONS ===== */
     .section { padding: 4rem 2.5rem; }
     .section-inner { max-width: 860px; margin: 0 auto; }
     .section-label {
@@ -337,7 +364,6 @@
     }
     .bg-white { background: var(--white); }
 
-    /* ===== SKILLS ===== */
     .skills-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .skill-tag {
       font-size: 12px;
@@ -356,7 +382,6 @@
     .st-amber  { background: var(--amber-pale);  color: #633806; border-color: #EF9F27; }
     .st-pink   { background: var(--pink-pale);   color: #72243E; border-color: #ED93B1; }
 
-    /* ===== PROJECTS ===== */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -387,8 +412,24 @@
     .proj-desc    { font-size: 12px; color: var(--text-muted); line-height: 1.65; }
     .proj-tags    { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
     .proj-tag     { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 10px; background: var(--bg); color: var(--text-muted); border: 0.5px solid var(--border); }
+    .proj-proof-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--purple);
+      background: var(--purple-pale);
+      border: 0.5px solid #AFA9EC;
+      padding: 6px 13px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.2s;
+    }
+    .proj-proof-btn:hover { transform: translateY(-2px); background: #E3E1FC; }
+    .proj-proof-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
 
-    /* ===== EXPERIENCE ===== */
     .exp-list { display: flex; flex-direction: column; }
     .exp-item {
       display: flex;
@@ -407,7 +448,6 @@
     .exp-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .exp-sub   { font-size: 12px; color: var(--text-faint); line-height: 1.6; }
 
-    /* ===== CERTS ===== */
     .cert-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -420,6 +460,7 @@
       padding: 1.1rem 1.25rem;
       border-left: 3px solid var(--purple);
       transition: transform 0.15s;
+      cursor: pointer;
     }
     .cert-card:hover { transform: translateY(-2px); }
     .cert-card:nth-child(2) { border-left-color: var(--teal); }
@@ -433,8 +474,17 @@
     .cert-date  { font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
     .cert-skills { display: flex; flex-wrap: wrap; gap: 4px; }
     .cert-skill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 8px; background: var(--purple-pale); color: #3C3489; }
+    .cert-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple);
+    }
+    .cert-view svg { width: 10px; height: 10px; }
 
-    /* ===== EDUCATION ===== */
     .edu-list { display: flex; flex-direction: column; gap: 18px; }
     .edu-card {
       background: var(--white);
@@ -462,7 +512,6 @@
     .edu-prodi  { font-size: 13px; color: var(--purple); font-weight: 500; margin-bottom: 3px; }
     .edu-year   { font-size: 12px; color: var(--text-faint); }
 
-    /* ===== CONTACT ===== */
     .contact-section {
       background: var(--dark);
       padding: 4.5rem 2.5rem;
@@ -501,7 +550,105 @@
       letter-spacing: 0.03em;
     }
 
-    /* ===== ANIMATIONS ===== */
+    .proof-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(10, 10, 20, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .proof-overlay.open { opacity: 1; pointer-events: auto; }
+    .proof-modal {
+      background: var(--white);
+      border-radius: 18px;
+      max-width: 640px;
+      width: 100%;
+      max-height: 86vh;
+      overflow-y: auto;
+      padding: 0 0 1.75rem;
+      transform: translateY(16px) scale(0.98);
+      transition: transform 0.25s ease;
+      position: relative;
+    }
+    .proof-overlay.open .proof-modal { transform: translateY(0) scale(1); }
+    .proof-close {
+      position: sticky;
+      top: 14px;
+      float: right;
+      margin-right: 14px;
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(15,15,26,0.75);
+      color: #fff;
+      font-size: 16px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .proof-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 14px 14px 0;
+      scroll-snap-type: x mandatory;
+    }
+    .proof-gallery img {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 10px;
+      scroll-snap-align: center;
+      background: var(--bg);
+      border: 0.5px solid var(--border);
+      display: block;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+    }
+    .proof-body { padding: 1.25rem 1.75rem 0; }
+    .proof-eyebrow { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+    .proof-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
+    .proof-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
+    .proof-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+    .proof-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .proof-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      background: var(--purple);
+      color: #fff;
+      transition: transform 0.15s;
+    }
+    .proof-link.secondary { background: var(--bg); color: var(--purple); border: 0.5px solid var(--border); }
+    .proof-link:hover { transform: translateY(-2px); }
+    .proof-link svg { width: 13px; height: 13px; }
+    .proof-note {
+      font-size: 11px;
+      color: var(--text-faint);
+      background: var(--bg);
+      border: 0.5px dashed var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -516,34 +663,38 @@
       transform: translateY(0);
     }
 
-    /* ===== RESPONSIVE ===== */
     @media (max-width: 600px) {
       .hero { padding: 4rem 1.25rem 5rem; }
       .section { padding: 3rem 1.25rem; }
       .contact-section { padding: 3rem 1.25rem; }
       .navbar-float a { padding: 7px 12px; font-size: 12px; }
+      .fx-toggle { top: 12px; left: 12px; }
+      .lang-toggle { top: 12px; right: 12px; }
+      .proof-body { padding: 1.1rem 1.25rem 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== FLOATING NAVBAR (adapted from NavBar component) ===== -->
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="id">ID</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div>
+
   <nav class="navbar-float" id="mainNav">
     <a href="#skills"      class="nav-link active" data-section="skills">
       <span class="nav-indicator"></span>
       <span class="nav-lamp"></span>
-      skill
+      <span data-i18n="nav.skills">skill</span>
     </a>
-    <a href="#projects"    class="nav-link" data-section="projects">proyek</a>
-    <a href="#experience"  class="nav-link" data-section="experience">organisasi</a>
-    <a href="#contact"     class="nav-link" data-section="contact">kontak</a>
+    <a href="#projects"    class="nav-link" data-section="projects"><span data-i18n="nav.projects">proyek</span></a>
+    <a href="#experience"  class="nav-link" data-section="experience"><span data-i18n="nav.experience">organisasi</span></a>
+    <a href="#contact"     class="nav-link" data-section="contact"><span data-i18n="nav.contact">kontak</span></a>
   </nav>
 
-  <!-- ===== HERO (MeshGradient + DotOrbit WebGL background) ===== -->
   <section class="hero">
     <canvas id="glCanvas"></canvas>
 
-    <!-- Effect toggle — adapted from demo.tsx activeEffect -->
     <div class="fx-toggle">
       <button class="fx-btn active" data-fx="mesh">mesh</button>
       <button class="fx-btn" data-fx="dots">dots</button>
@@ -551,35 +702,32 @@
     </div>
 
     <div class="hero-inner">
-      <div class="hero-badge">tersedia untuk peluang baru</div>
+      <div class="hero-badge" data-i18n="hero.badge">tersedia untuk peluang baru</div>
       <h1>
-        Halo, saya<br>
+        <span data-i18n="hero.greet">Halo, saya</span><br>
         <span class="h-purple">Andika Said</span><br>
-        seorang <span class="h-teal">full stack developer</span>
+        <span data-i18n="hero.role">seorang <span class="h-teal">full stack developer</span></span>
       </h1>
-      <p class="hero-desc">
+      <p class="hero-desc" data-i18n="hero.desc">
         Mahasiswa Manajemen Informatika Politeknik Astra yang berfokus pada
         pengembangan aplikasi web dan solusi teknologi inovatif.
       </p>
       <div class="hero-btns">
-        <!-- Metal Button (adapted from MetalButton component) -->
         <a href="#projects" class="metal-btn-wrapper">
           <div class="metal-btn-inner"></div>
-          <span class="metal-btn">lihat proyek saya</span>
+          <span class="metal-btn" data-i18n="hero.cta1">lihat proyek saya</span>
         </a>
-        <!-- Liquid Button (adapted from LiquidButton component) -->
         <a href="/CV%20Andika%20Said%20CDC.pdf" download="CV_Andika_Said.pdf" class="liquid-btn">
-          <span>unduh cv</span>
+          <span data-i18n="hero.cta2">unduh cv</span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ===== SKILLS ===== -->
   <section class="section" id="skills">
     <div class="section-inner reveal">
-      <div class="section-label">kemampuan</div>
-      <div class="section-title">tech stack & skill</div>
+      <div class="section-label" data-i18n="skills.label">kemampuan</div>
+      <div class="section-title" data-i18n="skills.title">tech stack & skill</div>
       <div class="skills-grid">
         <span class="skill-tag st-purple">C#</span>
         <span class="skill-tag st-purple">.NET MVC</span>
@@ -598,73 +746,97 @@
     </div>
   </section>
 
-  <!-- ===== PROJECTS ===== -->
   <section class="section bg-white" id="projects">
     <div class="section-inner reveal">
-      <div class="section-label">portofolio</div>
-      <div class="section-title">proyek</div>
+      <div class="section-label" data-i18n="projects.label">portofolio</div>
+      <div class="section-title" data-i18n="projects.title">proyek</div>
       <div class="projects-grid">
-        <div class="project-card">
+
+        <div class="project-card" data-proof="gs-medical-care">
           <div class="proj-period">Mei – Okt 2025</div>
           <div class="proj-company">PT GS Battery</div>
           <div class="proj-title">GS Medical Care</div>
-          <div class="proj-desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
+          <div class="proj-desc" data-i18n="proj.gsmedical.desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
           <div class="proj-tags">
             <span class="proj-tag">.NET MVC</span>
             <span class="proj-tag">SQL Server</span>
             <span class="proj-tag">OCR</span>
           </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="gs-medical-care">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
         </div>
-        <div class="project-card">
+
+        <div class="project-card" data-proof="chatbot-askmi">
           <div class="proj-period">Mei – Okt 2025</div>
           <div class="proj-company">Politeknik Astra</div>
           <div class="proj-title">Chatbot ASKMI</div>
-          <div class="proj-desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
+          <div class="proj-desc" data-i18n="proj.askmi.desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
           <div class="proj-tags">
             <span class="proj-tag">Web</span>
             <span class="proj-tag">Telegram API</span>
           </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="chatbot-askmi">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
         </div>
-        <div class="project-card">
+
+        <div class="project-card" data-proof="pmb-chatbot">
           <div class="proj-period">Sep 2024 – Feb 2025</div>
           <div class="proj-company">Politeknik Astra</div>
           <div class="proj-title">Chatbot & Cek Kelulusan PMB</div>
-          <div class="proj-desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
+          <div class="proj-desc" data-i18n="proj.pmb.desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
           <div class="proj-tags">
             <span class="proj-tag">Web</span>
             <span class="proj-tag">Chatbot</span>
           </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="pmb-chatbot">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
         </div>
-        <div class="project-card">
+
+        <div class="project-card" data-proof="inventory-dss">
           <div class="proj-period">Ongoing 2026</div>
           <div class="proj-company">PT Suryaraya Rubberindo Industries</div>
           <div class="proj-title">Inventory Control DSS</div>
-          <div class="proj-desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
+          <div class="proj-desc" data-i18n="proj.dss.desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
           <div class="proj-tags">
             <span class="proj-tag">Python</span>
             <span class="proj-tag">Streamlit</span>
             <span class="proj-tag">DSS</span>
           </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="inventory-dss">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
         </div>
-        <div class="project-card">
+
+        <div class="project-card" data-proof="laundry-system">
           <div class="proj-period">Mei – Jul 2025</div>
           <div class="proj-company">Politeknik Astra</div>
           <div class="proj-title">Laundry System</div>
-          <div class="proj-desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
+          <div class="proj-desc" data-i18n="proj.laundry.desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
           <div class="proj-tags">
             <span class="proj-tag">Android</span>
             <span class="proj-tag">SQLite</span>
           </div>
+          <button class="proj-proof-btn" type="button" data-open-proof="laundry-system">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+            <span data-i18n="proj.viewProof">lihat bukti</span>
+          </button>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ===== EXPERIENCE ===== -->
   <section class="section" id="experience">
     <div class="section-inner reveal">
-      <div class="section-label">perjalanan</div>
-      <div class="section-title">pengalaman organisasi</div>
+      <div class="section-label" data-i18n="exp.label">perjalanan</div>
+      <div class="section-title" data-i18n="exp.title">pengalaman organisasi</div>
       <div class="exp-list">
         <div class="exp-item">
           <div class="exp-dot-col">
@@ -673,8 +845,8 @@
           </div>
           <div class="exp-content">
             <div class="exp-date teal">Nov 2024 – Nov 2025</div>
-            <div class="exp-title">Kepala Departemen PHD — HIMMA Politeknik Astra</div>
-            <div class="exp-sub">Memimpin dan mengoordinasikan tim untuk mengelola strategi komunikasi, produksi konten kreatif, serta dokumentasi seluruh kegiatan organisasi. Menyusun rencana kerja departemen dan memastikan distribusi informasi berjalan efektif.</div>
+            <div class="exp-title" data-i18n="exp.kadept.title">Kepala Departemen PHD — HIMMA Politeknik Astra</div>
+            <div class="exp-sub" data-i18n="exp.kadept.sub">Memimpin dan mengoordinasikan tim untuk mengelola strategi komunikasi, produksi konten kreatif, serta dokumentasi seluruh kegiatan organisasi. Menyusun rencana kerja departemen dan memastikan distribusi informasi berjalan efektif.</div>
           </div>
         </div>
         <div class="exp-item">
@@ -683,71 +855,76 @@
           </div>
           <div class="exp-content">
             <div class="exp-date">Nov 2023 – Nov 2024</div>
-            <div class="exp-title">Staff Departemen PHD — HIMMA Politeknik Astra</div>
-            <div class="exp-sub">Bertanggung jawab atas pendokumentasian kegiatan melalui fotografi dan videografi, editing aset visual, serta produksi konten kreatif untuk media sosial resmi organisasi.</div>
+            <div class="exp-title" data-i18n="exp.staff.title">Staff Departemen PHD — HIMMA Politeknik Astra</div>
+            <div class="exp-sub" data-i18n="exp.staff.sub">Bertanggung jawab atas pendokumentasian kegiatan melalui fotografi dan videografi, editing aset visual, serta produksi konten kreatif untuk media sosial resmi organisasi.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== CERTIFICATIONS ===== -->
   <section class="section bg-white" id="certs">
     <div class="section-inner reveal">
-      <div class="section-label">sertifikasi</div>
-      <div class="section-title">pelatihan & sertifikat</div>
+      <div class="section-label" data-i18n="certs.label">sertifikasi</div>
+      <div class="section-title" data-i18n="certs.title">pelatihan & sertifikat</div>
       <div class="cert-grid">
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-network-fundamental">
           <div class="cert-name">Network Fundamental</div>
           <div class="cert-org">Aguna Course</div>
           <div class="cert-date">Sep 2025 · AC-555-23291893-72</div>
           <div class="cert-skills"><span class="cert-skill">Pengelolaan Jaringan</span><span class="cert-skill">Network Simulation</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-pnetlab">
           <div class="cert-name">Simulasi Jaringan dengan PNETLab</div>
           <div class="cert-org">Aguna Course</div>
           <div class="cert-date">Sep 2025 · AC-468-37822727-88</div>
           <div class="cert-skills"><span class="cert-skill">PNETLab</span><span class="cert-skill">Network Simulation</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-mikrotik">
           <div class="cert-name">MikroTik Certified Network Associate</div>
           <div class="cert-org">MikroTik</div>
           <div class="cert-date">Des 2025 – Des 2028 · 2512NA1105</div>
           <div class="cert-skills"><span class="cert-skill">Jaringan Komputer</span><span class="cert-skill">MikroTik RouterOS</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-vm-fundamental">
           <div class="cert-name">Virtual Machine Fundamental</div>
           <div class="cert-org">Aguna Course</div>
           <div class="cert-date">Sep 2025 – Jan 2028</div>
           <div class="cert-skills"><span class="cert-skill">Virtual Machine</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-oop">
           <div class="cert-name">Object-Oriented Programming (OOP)</div>
           <div class="cert-org">ID-Networkers (IDN.ID)</div>
           <div class="cert-date">Sep 2025 – Sep 2028</div>
           <div class="cert-skills"><span class="cert-skill">OOP</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-cisco">
           <div class="cert-name">Cisco Fundamental</div>
           <div class="cert-org">ID-Networkers (IDN.ID)</div>
           <div class="cert-date">Sep 2025 – Sep 2028</div>
           <div class="cert-skills"><span class="cert-skill">Cisco Fundamental</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
-        <div class="cert-card">
+        <div class="cert-card" data-proof="cert-cybersecurity">
           <div class="cert-name">Cyber Security</div>
           <div class="cert-org">ID-Networkers (IDN.ID)</div>
           <div class="cert-date">Sep 2025 – Sep 2028</div>
           <div class="cert-skills"><span class="cert-skill">Cyber Security</span></div>
+          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== EDUCATION ===== -->
   <section class="section" id="education">
     <div class="section-inner reveal">
-      <div class="section-label">pendidikan</div>
-      <div class="section-title">riwayat pendidikan</div>
+      <div class="section-label" data-i18n="edu.label">pendidikan</div>
+      <div class="section-title" data-i18n="edu.title">riwayat pendidikan</div>
       <div class="edu-list">
         <div class="edu-card">
           <div class="edu-badge d3">D3</div>
@@ -769,12 +946,11 @@
     </div>
   </section>
 
-  <!-- ===== CONTACT ===== -->
   <section class="contact-section" id="contact">
     <div class="section-inner reveal">
-      <div class="section-label">kontak</div>
-      <div class="section-title">mari berkolaborasi</div>
-      <p class="contact-desc">Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.</p>
+      <div class="section-label" data-i18n="contact.label">kontak</div>
+      <div class="section-title" data-i18n="contact.title">mari berkolaborasi</div>
+      <p class="contact-desc" data-i18n="contact.desc">Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.</p>
       <p class="contact-email">andikasaid88@gmail.com &nbsp;·&nbsp; 089523921454</p>
       <div class="contact-links">
         <a href="https://www.linkedin.com/in/andika-said-413289326" target="_blank" class="contact-btn">LinkedIn</a>
@@ -785,13 +961,24 @@
     </div>
   </section>
 
-  <footer>dibuat oleh Andika Said &nbsp;·&nbsp; 2025</footer>
+  <footer><span data-i18n="footer.made">dibuat oleh Andika Said</span> &nbsp;·&nbsp; 2025</footer>
+
+  <div class="proof-overlay" id="proofOverlay">
+    <div class="proof-modal" id="proofModal">
+      <button class="proof-close" id="proofClose" aria-label="Close">✕</button>
+      <div class="proof-gallery" id="proofGallery"></div>
+      <div class="proof-body">
+        <div class="proof-eyebrow" id="proofEyebrow"></div>
+        <div class="proof-title" id="proofTitle"></div>
+        <div class="proof-desc" id="proofDesc"></div>
+        <div class="proof-tags" id="proofTags"></div>
+        <div class="proof-links" id="proofLinks"></div>
+        <div class="proof-note" id="proofNote"></div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    /* ================================================================
-       WEBGL BACKGROUND — MeshGradient + DotOrbit
-       Adapted from @paper-design/shaders-react (demo.tsx)
-    ================================================================ */
     (function () {
       const canvas = document.getElementById('glCanvas');
       const gl = canvas.getContext('webgl', { alpha: false, antialias: true });
@@ -818,7 +1005,6 @@
         gl.linkProgram(p); return p;
       }
 
-      /* full-screen quad buffer */
       const qBuf = gl.createBuffer();
       gl.bindBuffer(gl.ARRAY_BUFFER, qBuf);
       gl.bufferData(gl.ARRAY_BUFFER,
@@ -832,7 +1018,6 @@
         gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 8, 0);
       }
 
-      /* ---- MeshGradient shader ---- */
       const vsMesh = `
         attribute vec2 p; varying vec2 uv;
         void main(){ uv=(p+1.0)*0.5; gl_Position=vec4(p,0,1); }
@@ -869,7 +1054,6 @@
         }
       `;
 
-      /* ---- DotOrbit shader ---- */
       const vsDot = `
         attribute vec2 p; varying vec2 uv;
         void main(){ uv=(p+1.0)*0.5; gl_Position=vec4(p,0,1); }
@@ -937,7 +1121,6 @@
       }
       render();
 
-      /* effect toggle */
       document.querySelectorAll('.fx-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('.fx-btn').forEach(b => b.classList.remove('active'));
@@ -948,9 +1131,6 @@
     })();
 
 
-    /* ================================================================
-       FLOATING NAVBAR — active state + lamp glow (adapted from NavBar)
-    ================================================================ */
     (function () {
       const links    = document.querySelectorAll('.nav-link');
       const sections = document.querySelectorAll('section[id]');
@@ -989,9 +1169,6 @@
     })();
 
 
-    /* ================================================================
-       SCROLL REVEAL
-    ================================================================ */
     (function () {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => {
@@ -1005,14 +1182,329 @@
     })();
 
 
-    /* ================================================================
-       METAL BUTTON — press animation
-    ================================================================ */
     document.querySelectorAll('.metal-btn-wrapper').forEach(btn => {
       btn.addEventListener('mousedown',  () => { btn.style.transform = 'translateY(2px) scale(0.99)'; btn.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)'; });
       btn.addEventListener('mouseup',    () => { btn.style.transform = ''; btn.style.boxShadow = ''; });
       btn.addEventListener('mouseleave', () => { btn.style.transform = ''; btn.style.boxShadow = ''; });
     });
+
+
+    const PROOF_DATA = {
+      'gs-medical-care': {
+        eyebrow: { id: 'PT GS Battery · Mei – Okt 2025', en: 'PT GS Battery · May – Oct 2025' },
+        title: 'GS Medical Care',
+        desc: {
+          id: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR untuk digitalisasi dokumen, unggahan data massal via Excel, serta dasbor analitik kesehatan interaktif untuk tim HR & medis.',
+          en: 'A web app for employee MCU and medical record management, featuring OCR for document digitization, bulk data upload via Excel, and an interactive health analytics dashboard for HR and medical teams.'
+        },
+        tags: ['.NET MVC', 'SQL Server', 'OCR'],
+        images: [
+          'assets/projects/gs-medical-care-1.png',
+          'assets/projects/gs-medical-care-2.png'
+        ],
+        links: [
+          { label: { id: 'Repo GitHub', en: 'GitHub Repo' }, url: '', type: 'secondary' },
+          { label: { id: 'Demo Live', en: 'Live Demo' }, url: '', type: 'primary' }
+        ]
+      },
+      'chatbot-askmi': {
+        eyebrow: { id: 'Politeknik Astra · Mei – Okt 2025', en: 'Politeknik Astra · May – Oct 2025' },
+        title: 'Chatbot ASKMI',
+        desc: {
+          id: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario percakapan interaktif, dan otomasi kegiatan organisasi kemahasiswaan.',
+          en: 'A web-based Telegram bot management platform with custom message scheduling, interactive conversation scenarios, and automation for student-organization activities.'
+        },
+        tags: ['Web', 'Telegram API'],
+        images: [
+          'assets/projects/chatbot-askmi-1.png'
+        ],
+        links: [
+          { label: { id: 'Repo GitHub', en: 'GitHub Repo' }, url: '', type: 'secondary' }
+        ]
+      },
+      'pmb-chatbot': {
+        eyebrow: { id: 'Politeknik Astra · Sep 2024 – Feb 2025', en: 'Politeknik Astra · Sep 2024 – Feb 2025' },
+        title: 'Chatbot & Cek Kelulusan PMB',
+        desc: {
+          id: 'Sistem web terintegrasi yang memudahkan calon mahasiswa mengakses informasi pendaftaran dan memeriksa status kelulusan secara real-time melalui chatbot.',
+          en: 'An integrated web system that lets prospective students access admission information and check acceptance status in real time via chatbot.'
+        },
+        tags: ['Web', 'Chatbot'],
+        images: [
+          'assets/projects/pmb-chatbot-1.png'
+        ],
+        links: [
+          { label: { id: 'Repo GitHub', en: 'GitHub Repo' }, url: '', type: 'secondary' }
+        ]
+      },
+      'inventory-dss': {
+        eyebrow: { id: 'PT Suryaraya Rubberindo Industries · Ongoing 2026', en: 'PT Suryaraya Rubberindo Industries · Ongoing 2026' },
+        title: 'Inventory Control DSS',
+        desc: {
+          id: 'Decision Support System berbasis Python dan Streamlit untuk membantu tim produksi mengoptimalkan manajemen stok dan menjaga stabilitas produksi.',
+          en: 'A Python and Streamlit-based Decision Support System that helps the production team optimize stock management and maintain production stability.'
+        },
+        tags: ['Python', 'Streamlit', 'DSS'],
+        images: [
+          'assets/projects/inventory-dss-1.png'
+        ],
+        links: [
+          { label: { id: 'Demo Live', en: 'Live Demo' }, url: '', type: 'primary' }
+        ]
+      },
+      'laundry-system': {
+        eyebrow: { id: 'Politeknik Astra · Mei – Jul 2025', en: 'Politeknik Astra · May – Jul 2025' },
+        title: 'Laundry System',
+        desc: {
+          id: 'Aplikasi Android fungsional untuk manajemen layanan laundry dan pencatatan transaksi menggunakan basis data lokal SQLite.',
+          en: 'A functional Android app for managing laundry services and recording transactions using a local SQLite database.'
+        },
+        tags: ['Android', 'SQLite'],
+        images: [
+          'assets/projects/laundry-system-1.png'
+        ],
+        links: [
+          { label: { id: 'Repo GitHub', en: 'GitHub Repo' }, url: '', type: 'secondary' }
+        ]
+      },
+      'cert-network-fundamental': {
+        eyebrow: { id: 'Aguna Course · Sep 2025', en: 'Aguna Course · Sep 2025' },
+        title: 'Network Fundamental',
+        desc: { id: 'No. Sertifikat AC-555-23291893-72', en: 'Certificate No. AC-555-23291893-72' },
+        tags: ['Pengelolaan Jaringan', 'Network Simulation'],
+        images: ['assets/certs/cert-network-fundamental.png'],
+        links: []
+      },
+      'cert-pnetlab': {
+        eyebrow: { id: 'Aguna Course · Sep 2025', en: 'Aguna Course · Sep 2025' },
+        title: 'Simulasi Jaringan dengan PNETLab',
+        desc: { id: 'No. Sertifikat AC-468-37822727-88', en: 'Certificate No. AC-468-37822727-88' },
+        tags: ['PNETLab', 'Network Simulation'],
+        images: ['assets/certs/cert-pnetlab.png'],
+        links: []
+      },
+      'cert-mikrotik': {
+        eyebrow: { id: 'MikroTik · Des 2025 – Des 2028', en: 'MikroTik · Dec 2025 – Dec 2028' },
+        title: 'MikroTik Certified Network Associate',
+        desc: { id: 'No. Sertifikat 2512NA1105', en: 'Certificate No. 2512NA1105' },
+        tags: ['Jaringan Komputer', 'MikroTik RouterOS'],
+        images: ['assets/certs/cert-mikrotik.png'],
+        links: [{ label: { id: 'Verifikasi', en: 'Verify' }, url: '', type: 'secondary' }]
+      },
+      'cert-vm-fundamental': {
+        eyebrow: { id: 'Aguna Course · Sep 2025 – Jan 2028', en: 'Aguna Course · Sep 2025 – Jan 2028' },
+        title: 'Virtual Machine Fundamental',
+        desc: { id: '', en: '' },
+        tags: ['Virtual Machine'],
+        images: ['assets/certs/cert-vm-fundamental.png'],
+        links: []
+      },
+      'cert-oop': {
+        eyebrow: { id: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028', en: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028' },
+        title: 'Object-Oriented Programming (OOP)',
+        desc: { id: '', en: '' },
+        tags: ['OOP'],
+        images: ['assets/certs/cert-oop.png'],
+        links: []
+      },
+      'cert-cisco': {
+        eyebrow: { id: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028', en: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028' },
+        title: 'Cisco Fundamental',
+        desc: { id: '', en: '' },
+        tags: ['Cisco Fundamental'],
+        images: ['assets/certs/cert-cisco.png'],
+        links: []
+      },
+      'cert-cybersecurity': {
+        eyebrow: { id: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028', en: 'ID-Networkers (IDN.ID) · Sep 2025 – Sep 2028' },
+        title: 'Cyber Security',
+        desc: { id: '', en: '' },
+        tags: ['Cyber Security'],
+        images: ['assets/certs/cert-cybersecurity.png'],
+        links: []
+      }
+    };
+
+    (function () {
+      const overlay  = document.getElementById('proofOverlay');
+      const gallery  = document.getElementById('proofGallery');
+      const eyebrow  = document.getElementById('proofEyebrow');
+      const title    = document.getElementById('proofTitle');
+      const desc     = document.getElementById('proofDesc');
+      const tagsBox  = document.getElementById('proofTags');
+      const linksBox = document.getElementById('proofLinks');
+      const noteBox  = document.getElementById('proofNote');
+      const closeBtn = document.getElementById('proofClose');
+
+      function currentLang() {
+        return document.documentElement.lang === 'en' ? 'en' : 'id';
+      }
+
+      const noteText = {
+        id: 'Catatan: gambar/bukti di atas adalah placeholder. Ganti file di folder assets/ dengan screenshot atau sertifikat asli, dan isi link repo/demo di variabel PROOF_DATA pada kode sumber.',
+        en: 'Note: the image/proof above is a placeholder. Replace the files in the assets/ folder with your real screenshots or certificates, and fill in the repo/demo links in the PROOF_DATA variable in the source code.'
+      };
+
+      function renderProof(key) {
+        const data = PROOF_DATA[key];
+        if (!data) return;
+        const lang = currentLang();
+
+        eyebrow.textContent = data.eyebrow ? data.eyebrow[lang] : '';
+        title.textContent   = data.title || '';
+        desc.textContent    = data.desc ? data.desc[lang] : '';
+
+        tagsBox.innerHTML = (data.tags || [])
+          .map(t => `<span class="proj-tag">${t}</span>`).join('');
+
+        gallery.innerHTML = '';
+        if (data.images && data.images.length) {
+          data.images.forEach(src => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = data.title || 'proof';
+            img.loading = 'lazy';
+            img.onerror = function () {
+              img.replaceWith(placeholderBlock(lang));
+            };
+            gallery.appendChild(img);
+          });
+        } else {
+          gallery.appendChild(placeholderBlock(lang));
+        }
+
+        linksBox.innerHTML = '';
+        (data.links || []).forEach(l => {
+          if (!l.url) return;
+          const a = document.createElement('a');
+          a.href = l.url;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.className = 'proof-link' + (l.type === 'secondary' ? ' secondary' : '');
+          a.textContent = l.label[lang];
+          linksBox.appendChild(a);
+        });
+
+        noteBox.textContent = noteText[lang];
+      }
+
+      function placeholderBlock(lang) {
+        const div = document.createElement('div');
+        div.style.cssText = 'width:100%;flex:0 0 100%;aspect-ratio:16/10;border-radius:10px;background:var(--bg);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:12px;text-align:center;padding:20px;';
+        div.textContent = lang === 'en'
+          ? 'No screenshot uploaded yet'
+          : 'Belum ada screenshot yang diunggah';
+        return div;
+      }
+
+      function openProof(key) {
+        renderProof(key);
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeProof() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-open-proof]').forEach(btn => {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          openProof(btn.dataset.openProof);
+        });
+      });
+      document.querySelectorAll('.cert-card[data-proof]').forEach(card => {
+        card.addEventListener('click', () => openProof(card.dataset.proof));
+      });
+
+      closeBtn.addEventListener('click', closeProof);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeProof(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProof(); });
+
+      overlay.__rerender = () => {
+        if (overlay.classList.contains('open')) {
+          const openCard = [...document.querySelectorAll('[data-proof]')]
+            .find(el => title.textContent && PROOF_DATA[el.dataset.proof] && PROOF_DATA[el.dataset.proof].title === title.textContent);
+          if (openCard) renderProof(openCard.dataset.proof);
+        }
+      };
+    })();
+
+
+    const TRANSLATIONS = {
+      'nav.skills': { id: 'skill', en: 'skills' },
+      'nav.projects': { id: 'proyek', en: 'projects' },
+      'nav.experience': { id: 'organisasi', en: 'experience' },
+      'nav.contact': { id: 'kontak', en: 'contact' },
+
+      'hero.badge': { id: 'tersedia untuk peluang baru', en: 'open to new opportunities' },
+      'hero.greet': { id: 'Halo, saya', en: "Hi, I'm" },
+      'hero.role': { id: 'seorang <span class="h-teal">full stack developer</span>', en: 'a <span class="h-teal">full stack developer</span>' },
+      'hero.desc': { id: 'Mahasiswa Manajemen Informatika Politeknik Astra yang berfokus pada pengembangan aplikasi web dan solusi teknologi inovatif.', en: 'An Informatics Management student at Politeknik Astra focused on building web applications and innovative technology solutions.' },
+      'hero.cta1': { id: 'lihat proyek saya', en: 'view my projects' },
+      'hero.cta2': { id: 'unduh cv', en: 'download cv' },
+
+      'skills.label': { id: 'kemampuan', en: 'skills' },
+      'skills.title': { id: 'tech stack & skill', en: 'tech stack & skills' },
+
+      'projects.label': { id: 'portofolio', en: 'portfolio' },
+      'projects.title': { id: 'proyek', en: 'projects' },
+      'proj.viewProof': { id: 'lihat bukti', en: 'view proof' },
+      'proj.gsmedical.desc': { id: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.', en: 'A web app for employee MCU and medical record management, featuring OCR, Excel uploads, and an interactive health analytics dashboard.' },
+      'proj.askmi.desc': { id: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.', en: 'A web-based Telegram bot management platform with custom message scheduling, interactive scenarios, and organization activity automation.' },
+      'proj.pmb.desc': { id: 'Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.', en: 'An integrated web system that lets prospective students access information and check acceptance status in real time.' },
+      'proj.dss.desc': { id: 'Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.', en: 'A Python and Streamlit-based Decision Support System for optimizing stock management and production stability.' },
+      'proj.laundry.desc': { id: 'Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.', en: 'A functional Android app for managing laundry services and transactions using a local SQLite database.' },
+
+      'exp.label': { id: 'perjalanan', en: 'journey' },
+      'exp.title': { id: 'pengalaman organisasi', en: 'organizational experience' },
+      'exp.kadept.title': { id: 'Kepala Departemen PHD — HIMMA Politeknik Astra', en: 'Head of PHD Department — HIMMA Politeknik Astra' },
+      'exp.kadept.sub': { id: 'Memimpin dan mengoordinasikan tim untuk mengelola strategi komunikasi, produksi konten kreatif, serta dokumentasi seluruh kegiatan organisasi. Menyusun rencana kerja departemen dan memastikan distribusi informasi berjalan efektif.', en: 'Led and coordinated a team to manage communication strategy, creative content production, and documentation of all organizational activities. Drafted the department work plan and ensured effective information distribution.' },
+      'exp.staff.title': { id: 'Staff Departemen PHD — HIMMA Politeknik Astra', en: 'Staff of PHD Department — HIMMA Politeknik Astra' },
+      'exp.staff.sub': { id: 'Bertanggung jawab atas pendokumentasian kegiatan melalui fotografi dan videografi, editing aset visual, serta produksi konten kreatif untuk media sosial resmi organisasi.', en: "Responsible for documenting activities through photography and videography, editing visual assets, and producing creative content for the organization's official social media." },
+
+      'certs.label': { id: 'sertifikasi', en: 'certifications' },
+      'certs.title': { id: 'pelatihan & sertifikat', en: 'training & certificates' },
+      'certs.viewCert': { id: 'lihat sertifikat', en: 'view certificate' },
+
+      'edu.label': { id: 'pendidikan', en: 'education' },
+      'edu.title': { id: 'riwayat pendidikan', en: 'education history' },
+
+      'contact.label': { id: 'kontak', en: 'contact' },
+      'contact.title': { id: 'mari berkolaborasi', en: "let's collaborate" },
+      'contact.desc': { id: 'Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.', en: 'Open to job opportunities, internships, and project collaborations.' },
+
+      'footer.made': { id: 'dibuat oleh Andika Said', en: 'made by Andika Said' }
+    };
+
+    (function () {
+      const STORAGE_KEY = 'andika-portfolio-lang';
+
+      function applyLang(lang) {
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+          const key = el.dataset.i18n;
+          const entry = TRANSLATIONS[key];
+          if (!entry) return;
+          el.innerHTML = entry[lang] !== undefined ? entry[lang] : entry.id;
+        });
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+
+        const overlay = document.getElementById('proofOverlay');
+        if (overlay && overlay.__rerender) overlay.__rerender();
+      }
+
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+      });
+
+      let saved = 'id';
+      try { saved = localStorage.getItem(STORAGE_KEY) || 'id'; } catch (e) {}
+      applyLang(saved);
+    })();
   </script>
 </body>
 </html>
