@@ -268,6 +268,41 @@
       animation: fadeUp 0.9s ease both;
     }
 
+    .highlights-section { padding: 2.5rem 2.5rem 3.5rem; }
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 20px;
+      text-align: center;
+    }
+    .highlight-item {
+      padding: 1.25rem 1rem;
+      border-radius: 14px;
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      transition: transform 0.2s;
+    }
+    .highlight-item:hover { transform: translateY(-3px); }
+    .highlight-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--purple);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .highlight-unit { font-size: 16px; font-weight: 600; }
+    .highlight-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+    @media (max-width: 600px) {
+      .highlights-section { padding: 2rem 1.25rem 2.5rem; }
+      .highlight-number { font-size: 26px; }
+    }
+
     .metal-btn-wrapper {
       position: relative;
       display: inline-flex;
@@ -658,16 +693,6 @@
     .proof-link.secondary { background: var(--bg); color: var(--purple); border: 0.5px solid var(--border); }
     .proof-link:hover { transform: translateY(-2px); }
     .proof-link svg { width: 13px; height: 13px; }
-    .proof-note {
-      font-size: 11px;
-      color: var(--text-faint);
-      background: var(--bg);
-      border: 0.5px dashed var(--border);
-      border-radius: 8px;
-      padding: 8px 12px;
-      margin-top: 14px;
-      line-height: 1.6;
-    }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -740,6 +765,29 @@
         <a href="/CV%20Andika%20Said%20CDC.pdf" download="CV_Andika_Said.pdf" class="liquid-btn">
           <span data-i18n="hero.cta2">unduh cv</span>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section highlights-section">
+    <div class="section-inner reveal">
+      <div class="highlights-grid">
+        <div class="highlight-item">
+          <div class="highlight-number">5+</div>
+          <div class="highlight-label" data-i18n="highlights.projects">Proyek Selesai</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-number">7</div>
+          <div class="highlight-label" data-i18n="highlights.certs">Sertifikasi Profesional</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-number">2</div>
+          <div class="highlight-label" data-i18n="highlights.partners">Mitra Industri</div>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-number">2 <span class="highlight-unit" data-i18n="highlights.yearsUnit">Tahun</span></div>
+          <div class="highlight-label" data-i18n="highlights.org">Pengalaman Organisasi</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1117,7 +1165,6 @@
         <div class="proof-desc" id="proofDesc"></div>
         <div class="proof-tags" id="proofTags"></div>
         <div class="proof-links" id="proofLinks"></div>
-        <div class="proof-note" id="proofNote"></div>
       </div>
     </div>
   </div>
@@ -1343,8 +1390,7 @@
         },
         tags: ['.NET MVC', 'SQL Server', 'OCR'],
         images: [
-          'assets/projects/gs-medical-care-1.png',
-          'assets/projects/gs-medical-care-2.png'
+          'assets/projects/gs-medical-care-1.png'
         ],
         links: [
           { label: { id: 'Repo GitHub', en: 'GitHub Repo' }, url: '', type: 'secondary' },
@@ -1477,17 +1523,11 @@
       const desc     = document.getElementById('proofDesc');
       const tagsBox  = document.getElementById('proofTags');
       const linksBox = document.getElementById('proofLinks');
-      const noteBox  = document.getElementById('proofNote');
       const closeBtn = document.getElementById('proofClose');
 
       function currentLang() {
         return document.documentElement.lang === 'en' ? 'en' : 'id';
       }
-
-      const noteText = {
-        id: 'Catatan: gambar/bukti di atas adalah placeholder. Ganti file di folder assets/ dengan screenshot atau sertifikat asli, dan isi link repo/demo di variabel PROOF_DATA pada kode sumber.',
-        en: 'Note: the image/proof above is a placeholder. Replace the files in the assets/ folder with your real screenshots or certificates, and fill in the repo/demo links in the PROOF_DATA variable in the source code.'
-      };
 
       function renderProof(key) {
         const data = PROOF_DATA[key];
@@ -1528,8 +1568,6 @@
           a.textContent = l.label[lang];
           linksBox.appendChild(a);
         });
-
-        noteBox.textContent = noteText[lang];
       }
 
       function placeholderBlock(lang) {
@@ -1627,7 +1665,13 @@
       'contact.title': { id: 'mari berkolaborasi', en: "let's collaborate" },
       'contact.desc': { id: 'Terbuka untuk peluang kerja, magang, maupun kolaborasi proyek.', en: 'Open to job opportunities, internships, and project collaborations.' },
 
-      'footer.made': { id: 'dibuat oleh Andika Said', en: 'made by Andika Said' }
+      'footer.made': { id: 'dibuat oleh Andika Said', en: 'made by Andika Said' },
+
+      'highlights.projects':  { id: 'Proyek Selesai',           en: 'Projects Completed' },
+      'highlights.certs':     { id: 'Sertifikasi Profesional',  en: 'Professional Certifications' },
+      'highlights.partners':  { id: 'Mitra Industri',           en: 'Industry Partners' },
+      'highlights.org':       { id: 'Pengalaman Organisasi',    en: 'Organizational Experience' },
+      'highlights.yearsUnit': { id: 'Tahun',                    en: 'Years' }
     };
 
     (function () {
