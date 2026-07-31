@@ -514,6 +514,141 @@
     .proj-proof-btn:hover { transform: translateY(-2px); background: #E3E1FC; }
     .proj-proof-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
 
+    /* --- ACCORDION GALLERY --- */
+    .acc-hint {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .accordion-wrap {
+      display: flex;
+      gap: 10px;
+      height: 300px;
+      margin-bottom: 18px;
+    }
+    .accordion-wrap:last-of-type { margin-bottom: 40px; }
+    .acc-card {
+      position: relative;
+      flex: 1;
+      min-width: 64px;
+      border-radius: 16px;
+      cursor: pointer;
+      overflow: hidden;
+      background: var(--dark);
+      transition: flex 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .acc-card:hover { flex: 4; }
+    .acc-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--acc-gradient);
+      opacity: 0.16;
+      transition: opacity 0.45s ease;
+    }
+    .acc-card:hover .acc-bg { opacity: 0.9; }
+    .acc-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .acc-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.05em;
+    }
+    .acc-chevron {
+      width: 14px; height: 14px;
+      color: rgba(255,255,255,0.4);
+      transition: transform 0.35s ease, color 0.3s ease;
+      flex-shrink: 0;
+    }
+    .acc-card:hover .acc-chevron { transform: rotate(180deg); color: #fff; }
+    .acc-center {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .acc-icon {
+      font-family: 'Syne', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.6);
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+    .acc-card:hover .acc-icon { opacity: 0; }
+    .acc-desc {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 22px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.4s ease 0.1s;
+    }
+    .acc-card:hover .acc-desc { opacity: 1; }
+    .acc-desc p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.65;
+    }
+    .acc-bottom {
+      position: relative;
+      z-index: 2;
+      padding: 16px;
+      text-align: center;
+    }
+    .acc-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .acc-bar {
+      height: 2px;
+      background: rgba(255,255,255,0.15);
+      margin-top: 10px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .acc-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--purple-light), var(--teal-light));
+      transition: width 0.5s ease 0.1s;
+    }
+    .acc-card:hover .acc-bar-fill { width: 100%; }
+
+    @media (max-width: 760px) {
+      .accordion-wrap { flex-direction: column; height: auto; }
+      .acc-card { flex: none !important; height: 96px; }
+      .acc-icon { font-size: 24px; }
+      .acc-desc { display: none; }
+      .acc-bg { opacity: 0.35; }
+    }
+
     .exp-list { display: flex; flex-direction: column; }
     .exp-item {
       display: flex;
@@ -836,6 +971,92 @@
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="projects.label">portofolio</div>
       <div class="section-title" data-i18n="projects.title">proyek</div>
+
+      <div class="acc-hint" data-i18n="projects.hint">arahkan kursor untuk pratinjau</div>
+      <div class="accordion-wrap">
+
+        <div class="acc-card" data-open-proof="gs-medical-care" style="--acc-gradient: linear-gradient(135deg, #534AB7, #185FA5);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">01</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">GS</span>
+            <div class="acc-desc"><p>Sistem manajemen MCU &amp; rekam medis karyawan</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">GS Medical Care</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="chatbot-askmi" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #5DCAA5);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">02</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">AS</span>
+            <div class="acc-desc"><p>Platform manajemen bot Telegram untuk HIMMA</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Chatbot ASKMI</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="pmb-chatbot" style="--acc-gradient: linear-gradient(135deg, #D85A30, #BA7517);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">03</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">PM</span>
+            <div class="acc-desc"><p>Chatbot &amp; cek kelulusan PMB real-time</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">PMB Chatbot</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="inventory-dss" style="--acc-gradient: linear-gradient(135deg, #185FA5, #993556);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">04</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">DS</span>
+            <div class="acc-desc"><p>Decision Support System untuk kontrol stok</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Inventory DSS</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="laundry-system" style="--acc-gradient: linear-gradient(135deg, #993556, #534AB7);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">05</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">LS</span>
+            <div class="acc-desc"><p>Aplikasi Android manajemen laundry</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Laundry System</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+      </div>
+
       <div class="projects-grid">
 
         <div class="project-card" data-proof="gs-medical-care">
@@ -1099,6 +1320,125 @@
     <div class="section-inner reveal">
       <div class="section-label" data-i18n="certs.label">sertifikasi</div>
       <div class="section-title" data-i18n="certs.title">pelatihan & sertifikat</div>
+
+      <div class="acc-hint" data-i18n="certs.hint">arahkan kursor untuk pratinjau</div>
+
+      <div class="accordion-wrap">
+        <div class="acc-card" data-open-proof="cert-network-fundamental" style="--acc-gradient: linear-gradient(135deg, #534AB7, #185FA5);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">01</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">NF</span>
+            <div class="acc-desc"><p>Network Fundamental — Aguna Course</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Network Fundamental</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="cert-pnetlab" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #5DCAA5);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">02</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">PL</span>
+            <div class="acc-desc"><p>Simulasi Jaringan dengan PNETLab</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">PNETLab</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="cert-mikrotik" style="--acc-gradient: linear-gradient(135deg, #BA7517, #D85A30);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">03</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">MT</span>
+            <div class="acc-desc"><p>MikroTik Certified Network Associate</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">MikroTik CNA</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="cert-vm-fundamental" style="--acc-gradient: linear-gradient(135deg, #185FA5, #993556);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">04</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">VM</span>
+            <div class="acc-desc"><p>Virtual Machine Fundamental</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">VM Fundamental</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-wrap" style="margin-top: -18px;">
+        <div class="acc-card" data-open-proof="cert-oop" style="--acc-gradient: linear-gradient(135deg, #993556, #534AB7);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">05</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">OOP</span>
+            <div class="acc-desc"><p>Object-Oriented Programming</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">OOP</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="cert-cisco" style="--acc-gradient: linear-gradient(135deg, #D85A30, #BA7517);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">06</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">CS</span>
+            <div class="acc-desc"><p>Cisco Fundamental</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Cisco Fundamental</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+
+        <div class="acc-card" data-open-proof="cert-cybersecurity" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #185FA5);">
+          <div class="acc-bg"></div>
+          <div class="acc-top">
+            <span class="acc-num">07</span>
+            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="acc-center">
+            <span class="acc-icon">CY</span>
+            <div class="acc-desc"><p>Cyber Security Dasar</p></div>
+          </div>
+          <div class="acc-bottom">
+            <div class="acc-title">Cyber Security</div>
+            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
       <div class="cert-grid">
         <div class="cert-card" data-proof="cert-network-fundamental">
           <div class="cert-name">Network Fundamental</div>
@@ -1772,6 +2112,7 @@
 
       'projects.label': { id: 'portofolio', en: 'portfolio' },
       'projects.title': { id: 'proyek', en: 'projects' },
+      'projects.hint': { id: 'arahkan kursor untuk pratinjau', en: 'hover to preview' },
       'proj.viewProof': { id: 'lihat bukti', en: 'view proof' },
       'proj.gsmedical.desc': { id: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.', en: 'A web app for employee MCU and medical record management, featuring OCR, Excel uploads, and an interactive health analytics dashboard.' },
       'proj.askmi.desc': { id: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.', en: 'A web-based Telegram bot management platform with custom message scheduling, interactive scenarios, and organization activity automation.' },
@@ -1788,6 +2129,7 @@
 
       'certs.label': { id: 'sertifikasi', en: 'certifications' },
       'certs.title': { id: 'pelatihan & sertifikat', en: 'training & certificates' },
+      'certs.hint': { id: 'arahkan kursor untuk pratinjau', en: 'hover to preview' },
       'certs.viewCert': { id: 'lihat sertifikat', en: 'view certificate' },
 
       'edu.label': { id: 'pendidikan', en: 'education' },
