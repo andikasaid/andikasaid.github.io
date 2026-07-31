@@ -624,7 +624,7 @@
     }
 
     /* ========================================
-       PROOF MODAL
+       MODAL GALLERY
     ======================================== */
     .modal-overlay {
       position: fixed;
@@ -671,7 +671,58 @@
       justify-content: center;
       z-index: 2;
     }
-    .modal-body { padding: 20px 28px 28px; }
+
+    .modal-gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 20px 20px 0;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+    }
+    .modal-gallery img {
+      width: 100%;
+      flex: 0 0 100%;
+      max-width: 100%;
+      border-radius: 12px;
+      scroll-snap-align: center;
+      background: #f0f0f0;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    .modal-dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 0 4px;
+    }
+    .modal-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #d1d5db;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .modal-dot.active {
+      background: var(--purple);
+      transform: scale(1.3);
+    }
+    .modal-placeholder {
+      width: 100%;
+      flex: 0 0 100%;
+      aspect-ratio: 16/10;
+      border-radius: 12px;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 13px;
+      border: 2px dashed #e5e7eb;
+    }
+
+    .modal-body { padding: 12px 28px 28px; }
     .modal-body .eyebrow { font-size: 11px; color: var(--gray-light); text-transform: uppercase; letter-spacing: 0.06em; }
     .modal-body h3 { font-family: 'Syne', sans-serif; font-size: 22px; margin: 4px 0 10px; }
     .modal-body .desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
@@ -978,26 +1029,50 @@
       <div class="cert-card" data-open="cert-network-fundamental">
         <h4>Network Fundamental</h4>
         <div class="org">Aguna Course</div>
-        <div class="date">Sep 2025</div>
+        <div class="date">Sep 2025 · AC-555-23291893-72</div>
         <div class="skills"><span>Pengelolaan Jaringan</span><span>Network Simulation</span></div>
       </div>
+
       <div class="cert-card" data-open="cert-pnetlab">
-        <h4>PNETLab Simulation</h4>
+        <h4>Simulasi Jaringan dengan PNETLab</h4>
         <div class="org">Aguna Course</div>
-        <div class="date">Sep 2025</div>
+        <div class="date">Sep 2025 · AC-468-37822727-88</div>
         <div class="skills"><span>PNETLab</span><span>Network Simulation</span></div>
       </div>
+
       <div class="cert-card" data-open="cert-mikrotik">
-        <h4>MikroTik CNA</h4>
+        <h4>MikroTik Certified Network Associate</h4>
         <div class="org">MikroTik</div>
-        <div class="date">Des 2025 – Des 2028</div>
-        <div class="skills"><span>MikroTik RouterOS</span></div>
+        <div class="date">Des 2025 – Des 2028 · 2512NA1105</div>
+        <div class="skills"><span>Jaringan Komputer</span><span>MikroTik RouterOS</span></div>
       </div>
+
+      <div class="cert-card" data-open="cert-vm-fundamental">
+        <h4>Virtual Machine Fundamental</h4>
+        <div class="org">Aguna Course</div>
+        <div class="date">Sep 2025 – Jan 2028</div>
+        <div class="skills"><span>Virtual Machine</span></div>
+      </div>
+
       <div class="cert-card" data-open="cert-oop">
-        <h4>OOP</h4>
-        <div class="org">ID-Networkers</div>
+        <h4>Object-Oriented Programming (OOP)</h4>
+        <div class="org">ID-Networkers (IDN.ID)</div>
         <div class="date">Sep 2025 – Sep 2028</div>
-        <div class="skills"><span>Object-Oriented Programming</span></div>
+        <div class="skills"><span>OOP</span></div>
+      </div>
+
+      <div class="cert-card" data-open="cert-cisco">
+        <h4>Cisco Fundamental</h4>
+        <div class="org">ID-Networkers (IDN.ID)</div>
+        <div class="date">Sep 2025 – Sep 2028</div>
+        <div class="skills"><span>Cisco Fundamental</span></div>
+      </div>
+
+      <div class="cert-card" data-open="cert-cybersecurity">
+        <h4>Cyber Security</h4>
+        <div class="org">ID-Networkers (IDN.ID)</div>
+        <div class="date">Sep 2025 – Sep 2028</div>
+        <div class="skills"><span>Cyber Security</span></div>
       </div>
     </div>
   </section>
@@ -1059,6 +1134,11 @@
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal" id="modal">
       <button class="modal-close" id="modalClose">✕</button>
+      
+      <!-- Gallery Images -->
+      <div class="modal-gallery" id="modalGallery"></div>
+      <div class="modal-dots" id="modalDots"></div>
+      
       <div class="modal-body">
         <div class="eyebrow" id="modalEyebrow"></div>
         <h3 id="modalTitle"></h3>
@@ -1143,30 +1223,145 @@
       const overlay = document.getElementById('modalOverlay');
       const modal = document.getElementById('modal');
       const closeBtn = document.getElementById('modalClose');
+      const gallery = document.getElementById('modalGallery');
+      const dots = document.getElementById('modalDots');
       const eyebrow = document.getElementById('modalEyebrow');
       const title = document.getElementById('modalTitle');
       const desc = document.getElementById('modalDesc');
       const tags = document.getElementById('modalTags');
 
       const data = {
-        'gs-medical-care': { eyebrow: 'PT GS Battery · Mei – Okt 2025', title: 'GS Medical Care', desc: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.', tags: ['.NET MVC', 'SQL Server', 'OCR'] },
-        'chatbot-askmi': { eyebrow: 'Politeknik Astra · Mei – Okt 2025', title: 'Chatbot ASKMI', desc: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom dan otomasi kegiatan organisasi.', tags: ['Web', 'Telegram API'] },
-        'pmb-chatbot': { eyebrow: 'Politeknik Astra · Sep 2024 – Feb 2025', title: 'PMB Chatbot', desc: 'Sistem web terintegrasi untuk cek kelulusan dan informasi PMB real-time.', tags: ['Web', 'Chatbot'] },
-        'inventory-dss': { eyebrow: 'PT Suryaraya Rubberindo · Ongoing 2026', title: 'Inventory DSS', desc: 'Decision Support System berbasis Python dan Streamlit untuk optimasi stok dan produksi.', tags: ['Python', 'Streamlit', 'DSS'] },
-        'laundry-system': { eyebrow: 'Politeknik Astra · Mei – Jul 2025', title: 'Laundry System', desc: 'Aplikasi Android untuk manajemen laundry dengan SQLite.', tags: ['Android', 'SQLite'] },
-        'cert-network-fundamental': { eyebrow: 'Aguna Course · Sep 2025', title: 'Network Fundamental', desc: 'Sertifikat pengelolaan jaringan dan simulasi.', tags: ['Pengelolaan Jaringan', 'Network Simulation'] },
-        'cert-pnetlab': { eyebrow: 'Aguna Course · Sep 2025', title: 'PNETLab Simulation', desc: 'Sertifikat simulasi jaringan dengan PNETLab.', tags: ['PNETLab', 'Network Simulation'] },
-        'cert-mikrotik': { eyebrow: 'MikroTik · Des 2025 – Des 2028', title: 'MikroTik CNA', desc: 'MikroTik Certified Network Associate.', tags: ['MikroTik RouterOS'] },
-        'cert-oop': { eyebrow: 'ID-Networkers · Sep 2025 – Sep 2028', title: 'OOP', desc: 'Object-Oriented Programming.', tags: ['OOP'] }
+        'gs-medical-care': { 
+          eyebrow: 'PT GS Battery · Mei – Okt 2025', 
+          title: 'GS Medical Care', 
+          desc: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.', 
+          tags: ['.NET MVC', 'SQL Server', 'OCR'],
+          images: ['assets/projects/gs-medical-care-1.png']
+        },
+        'chatbot-askmi': { 
+          eyebrow: 'Politeknik Astra · Mei – Okt 2025', 
+          title: 'Chatbot ASKMI', 
+          desc: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom dan otomasi kegiatan organisasi.', 
+          tags: ['Web', 'Telegram API'],
+          images: ['assets/projects/chatbot-askmi-1.png']
+        },
+        'pmb-chatbot': { 
+          eyebrow: 'Politeknik Astra · Sep 2024 – Feb 2025', 
+          title: 'PMB Chatbot', 
+          desc: 'Sistem web terintegrasi untuk cek kelulusan dan informasi PMB real-time.', 
+          tags: ['Web', 'Chatbot'],
+          images: ['assets/projects/pmb-chatbot-1.png']
+        },
+        'inventory-dss': { 
+          eyebrow: 'PT Suryaraya Rubberindo · Ongoing 2026', 
+          title: 'Inventory DSS', 
+          desc: 'Decision Support System berbasis Python dan Streamlit untuk optimasi stok dan produksi.', 
+          tags: ['Python', 'Streamlit', 'DSS'],
+          images: ['assets/projects/inventory-dss-1.png']
+        },
+        'laundry-system': { 
+          eyebrow: 'Politeknik Astra · Mei – Jul 2025', 
+          title: 'Laundry System', 
+          desc: 'Aplikasi Android untuk manajemen laundry dengan SQLite.', 
+          tags: ['Android', 'SQLite'],
+          images: ['assets/projects/laundry-system-1.png']
+        },
+        'cert-network-fundamental': { 
+          eyebrow: 'Aguna Course · Sep 2025', 
+          title: 'Network Fundamental', 
+          desc: 'Sertifikat pengelolaan jaringan dan simulasi. No. AC-555-23291893-72', 
+          tags: ['Pengelolaan Jaringan', 'Network Simulation'],
+          images: ['assets/certs/cert-network-fundamental.png']
+        },
+        'cert-pnetlab': { 
+          eyebrow: 'Aguna Course · Sep 2025', 
+          title: 'Simulasi Jaringan dengan PNETLab', 
+          desc: 'Sertifikat simulasi jaringan dengan PNETLab. No. AC-468-37822727-88', 
+          tags: ['PNETLab', 'Network Simulation'],
+          images: ['assets/certs/cert-pnetlab.png']
+        },
+        'cert-mikrotik': { 
+          eyebrow: 'MikroTik · Des 2025 – Des 2028', 
+          title: 'MikroTik Certified Network Associate', 
+          desc: 'MikroTik Certified Network Associate. No. 2512NA1105', 
+          tags: ['Jaringan Komputer', 'MikroTik RouterOS'],
+          images: ['assets/certs/cert-mikrotik.png']
+        },
+        'cert-vm-fundamental': { 
+          eyebrow: 'Aguna Course · Sep 2025 – Jan 2028', 
+          title: 'Virtual Machine Fundamental', 
+          desc: 'Virtual Machine Fundamental.', 
+          tags: ['Virtual Machine'],
+          images: ['assets/certs/cert-vm-fundamental.png']
+        },
+        'cert-oop': { 
+          eyebrow: 'ID-Networkers · Sep 2025 – Sep 2028', 
+          title: 'Object-Oriented Programming (OOP)', 
+          desc: 'Object-Oriented Programming.', 
+          tags: ['OOP'],
+          images: ['assets/certs/cert-oop.png']
+        },
+        'cert-cisco': { 
+          eyebrow: 'ID-Networkers · Sep 2025 – Sep 2028', 
+          title: 'Cisco Fundamental', 
+          desc: 'Cisco Fundamental.', 
+          tags: ['Cisco Fundamental'],
+          images: ['assets/certs/cert-cisco.png']
+        },
+        'cert-cybersecurity': { 
+          eyebrow: 'ID-Networkers · Sep 2025 – Sep 2028', 
+          title: 'Cyber Security', 
+          desc: 'Cyber Security Dasar.', 
+          tags: ['Cyber Security'],
+          images: ['assets/certs/cert-cybersecurity.png']
+        }
       };
 
       function openModal(key) {
         const d = data[key];
         if (!d) return;
+        
         eyebrow.textContent = d.eyebrow;
         title.textContent = d.title;
         desc.textContent = d.desc;
         tags.innerHTML = d.tags.map(t => `<span>${t}</span>`).join('');
+        
+        // Render Gallery
+        gallery.innerHTML = '';
+        dots.innerHTML = '';
+        
+        if (d.images && d.images.length > 0) {
+          d.images.forEach((src, i) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = d.title;
+            img.loading = 'lazy';
+            img.onerror = function() {
+              this.outerHTML = `<div class="modal-placeholder">📷 Gambar tidak tersedia</div>`;
+            };
+            gallery.appendChild(img);
+            
+            // Dots
+            if (d.images.length > 1) {
+              const dot = document.createElement('span');
+              dot.className = 'modal-dot' + (i === 0 ? ' active' : '');
+              dots.appendChild(dot);
+            }
+          });
+          
+          // Scroll sync for dots
+          if (d.images.length > 1) {
+            gallery.onscroll = function() {
+              const idx = Math.round(this.scrollLeft / this.clientWidth);
+              dots.querySelectorAll('.modal-dot').forEach((d, i) => {
+                d.classList.toggle('active', i === idx);
+              });
+            };
+          }
+        } else {
+          gallery.innerHTML = `<div class="modal-placeholder">📷 Belum ada screenshot</div>`;
+        }
+        
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
       }
@@ -1174,6 +1369,7 @@
       function closeModal() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
+        gallery.scrollLeft = 0;
       }
 
       document.querySelectorAll('[data-open]').forEach(el => {
