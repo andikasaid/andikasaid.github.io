@@ -258,6 +258,15 @@
       align-items: center;
       justify-content: center;
     }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      z-index: 1;
+      pointer-events: none;
+    }
     #glCanvas {
       position: absolute;
       inset: 0;
@@ -435,31 +444,28 @@
     }
     .metal-btn-wrapper:active .metal-btn { transform: scale(0.97); }
 
-    .liquid-btn {
+    .btn-outline {
       position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       padding: 11px 28px;
-      border-radius: 50px;
+      border-radius: 10px;
       font-family: 'DM Sans', sans-serif;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      border: 1.5px solid var(--teal-light);
+      border: 1.5px solid rgba(255,255,255,0.25);
       background: transparent;
-      color: var(--teal-light);
-      text-decoration: none;
-      transition: transform 0.3s ease, color 0.2s, box-shadow 0.3s;
-      overflow: hidden;
-    }
-    .liquid-btn:hover {
-      transform: scale(1.05);
       color: #fff;
-      box-shadow: 0 0 20px rgba(93,202,165,0.3),
-                  inset 0 0 12px rgba(93,202,165,0.1);
+      text-decoration: none;
+      transition: transform 0.25s cubic-bezier(0.1,0.4,0.2,1), border-color 0.2s, background 0.2s;
     }
-    .liquid-btn span { position: relative; z-index: 2; }
+    .btn-outline:hover {
+      transform: translateY(-1px);
+      border-color: var(--purple-light);
+      background: rgba(83,74,183,0.15);
+    }
 
     .section { padding: 4rem 2.5rem; }
     .section:not(.bg-white):not(.contact-section) { background: transparent; }
@@ -541,52 +547,88 @@
     .skill-cat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
     .dot-purple { background: var(--purple); }
     .dot-teal   { background: var(--teal); }
-    .dot-coral  { background: var(--coral); }
-    .dot-blue   { background: var(--blue); }
-    .dot-amber  { background: var(--amber); }
-    .dot-pink   { background: var(--pink); }
+    .dot-gray   { background: var(--text-faint); }
+
+    /* Skill tags - only 2 accent colors + neutral */
     .st-purple { background: rgba(83,74,183,0.15); color: #3C3489; border-color: #AFA9EC; }
     .st-teal   { background: rgba(15,110,86,0.15);   color: #085041; border-color: #5DCAA5; }
-    .st-coral  { background: rgba(216,90,48,0.15);  color: #712B13; border-color: #F0997B; }
-    .st-blue   { background: rgba(24,95,165,0.15);   color: #0C447C; border-color: #85B7EB; }
-    .st-amber  { background: rgba(186,117,23,0.15);  color: #633806; border-color: #EF9F27; }
-    .st-pink   { background: rgba(153,53,86,0.15);   color: #72243E; border-color: #ED93B1; }
+    .st-coral, .st-blue, .st-amber, .st-pink {
+      background: rgba(26,26,46,0.06);
+      color: var(--text-muted);
+      border-color: rgba(26,26,46,0.12);
+    }
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 18px;
+      align-items: start;
     }
-    .project-card {
+
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    /* Flip Card */
+    .flip-card {
+      perspective: 1200px;
+      height: 260px;
+    }
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 1.4rem;
       background: rgba(255,255,255,0.35);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 14px;
-      padding: 1.4rem;
-      cursor: pointer;
-      transition: transform 0.15s ease-out, box-shadow 0.2s, background 0.2s;
-      border-top-width: 3px;
-      border-top-style: solid;
-      transform-style: preserve-3d;
-      will-change: transform;
       box-shadow: 0 4px 16px rgba(83,74,183,0.06);
+      display: flex;
+      flex-direction: column;
     }
-    .project-card:hover {
-      background: rgba(255,255,255,0.5);
-      box-shadow: 0 10px 30px rgba(83,74,183,0.12);
+    .flip-front { border-top: 3px solid var(--purple); }
+    .flip-back {
+      transform: rotateY(180deg);
+      justify-content: space-between;
+      border-top: 3px solid var(--teal);
     }
-    .project-card:nth-child(1) { border-top-color: var(--purple); }
-    .project-card:nth-child(2) { border-top-color: var(--teal); }
-    .project-card:nth-child(3) { border-top-color: var(--coral); }
-    .project-card:nth-child(4) { border-top-color: var(--blue); }
-    .project-card:nth-child(5) { border-top-color: var(--pink); }
+    .flip-hint {
+      margin-top: auto;
+      font-size: 10px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
     .proj-period  { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 4px; }
     .proj-company { font-size: 10px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
     .proj-title   { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text); }
     .proj-desc    { font-size: 12px; color: var(--text-muted); line-height: 1.65; }
     .proj-tags    { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
     .proj-tag     { font-size: 10px; font-weight: 500; padding: 3px 9px; border-radius: 10px; background: rgba(255,255,255,0.6); color: var(--text-muted); border: 0.5px solid rgba(255,255,255,0.6); }
+
+    .cert-name  { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .cert-org   { font-size: 11px; color: var(--purple); margin-bottom: 3px; font-weight: 500; }
+    .cert-date  { font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
+    .cert-skills { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+    .cert-skill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 8px; background: rgba(83,74,183,0.12); color: #3C3489; }
+
     .proj-proof-btn {
       display: inline-flex;
       align-items: center;
@@ -605,142 +647,22 @@
     .proj-proof-btn:hover { transform: translateY(-2px); background: rgba(83,74,183,0.2); }
     .proj-proof-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
 
-    /* --- ACCORDION GALLERY --- */
-    .acc-hint {
-      text-align: center;
-      font-size: 11px;
-      color: var(--text-faint);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 16px;
-    }
-    .accordion-wrap {
-      display: flex;
-      gap: 10px;
-      height: 300px;
-      margin-bottom: 18px;
-    }
-    .accordion-wrap:last-of-type { margin-bottom: 40px; }
-    .acc-card {
-      position: relative;
-      flex: 1;
-      min-width: 64px;
-      border-radius: 16px;
+    .cert-view {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--purple);
+      background: rgba(83,74,183,0.12);
+      border: 0.5px solid rgba(83,74,183,0.2);
+      padding: 6px 13px;
+      border-radius: 20px;
       cursor: pointer;
-      overflow: hidden;
-      background: rgba(15, 15, 26, 0.65);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transition: flex 0.5s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 0.5px solid rgba(255,255,255,0.08);
+      transition: transform 0.15s, background 0.2s;
     }
-    .acc-card:hover { flex: 4; }
-    .acc-bg {
-      position: absolute;
-      inset: 0;
-      background: var(--acc-gradient);
-      opacity: 0.16;
-      transition: opacity 0.45s ease;
-    }
-    .acc-card:hover .acc-bg { opacity: 0.9; }
-    .acc-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px;
-      position: relative;
-      z-index: 2;
-    }
-    .acc-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.55);
-      letter-spacing: 0.05em;
-    }
-    .acc-chevron {
-      width: 14px; height: 14px;
-      color: rgba(255,255,255,0.4);
-      transition: transform 0.35s ease, color 0.3s ease;
-      flex-shrink: 0;
-    }
-    .acc-card:hover .acc-chevron { transform: rotate(180deg); color: #fff; }
-    .acc-center {
-      flex: 1;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .acc-icon {
-      font-family: 'Syne', sans-serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.6);
-      transition: opacity 0.3s ease;
-      white-space: nowrap;
-    }
-    .acc-card:hover .acc-icon { opacity: 0; }
-    .acc-desc {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 22px;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.4s ease 0.1s;
-    }
-    .acc-card:hover .acc-desc { opacity: 1; }
-    .acc-desc p {
-      font-size: 12px;
-      color: rgba(255,255,255,0.88);
-      line-height: 1.65;
-    }
-    .acc-bottom {
-      position: relative;
-      z-index: 2;
-      padding: 16px;
-      text-align: center;
-    }
-    .acc-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #fff;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .acc-bar {
-      height: 2px;
-      background: rgba(255,255,255,0.15);
-      margin-top: 10px;
-      border-radius: 2px;
-      overflow: hidden;
-    }
-    .acc-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--purple-light), var(--teal-light));
-      transition: width 0.5s ease 0.1s;
-    }
-    .acc-card:hover .acc-bar-fill { width: 100%; }
-
-    @media (max-width: 760px) {
-      .accordion-wrap { flex-direction: column; height: auto; }
-      .acc-card { flex: none !important; height: 96px; }
-      .acc-icon { font-size: 24px; }
-      .acc-desc { display: none; }
-      .acc-bg { opacity: 0.35; }
-    }
+    .cert-view:hover { transform: translateY(-2px); background: rgba(83,74,183,0.2); }
+    .cert-view svg { width: 10px; height: 10px; }
 
     .exp-list { display: flex; flex-direction: column; }
     .exp-item {
@@ -759,46 +681,6 @@
     .exp-date.teal { color: var(--teal); }
     .exp-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
     .exp-sub   { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 14px;
-    }
-    .cert-card {
-      background: rgba(255,255,255,0.35);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.6);
-      border-radius: 0 12px 12px 0;
-      padding: 1.1rem 1.25rem;
-      border-left: 3px solid var(--purple);
-      transition: transform 0.15s, background 0.2s;
-      cursor: pointer;
-      box-shadow: 0 4px 16px rgba(83,74,183,0.06);
-    }
-    .cert-card:hover { transform: translateY(-2px); background: rgba(255,255,255,0.5); }
-    .cert-card:nth-child(2) { border-left-color: var(--teal); }
-    .cert-card:nth-child(3) { border-left-color: var(--coral); }
-    .cert-card:nth-child(4) { border-left-color: var(--blue); }
-    .cert-card:nth-child(5) { border-left-color: var(--amber); }
-    .cert-card:nth-child(6) { border-left-color: var(--pink); }
-    .cert-card:nth-child(7) { border-left-color: var(--teal); }
-    .cert-name  { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
-    .cert-org   { font-size: 11px; color: var(--purple); margin-bottom: 3px; font-weight: 500; }
-    .cert-date  { font-size: 11px; color: var(--text-faint); margin-bottom: 8px; }
-    .cert-skills { display: flex; flex-wrap: wrap; gap: 4px; }
-    .cert-skill { font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 8px; background: rgba(83,74,183,0.12); color: #3C3489; }
-    .cert-view {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      margin-top: 10px;
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--purple);
-    }
-    .cert-view svg { width: 10px; height: 10px; }
 
     .edu-list { display: flex; flex-direction: column; gap: 18px; }
     .edu-card {
@@ -957,6 +839,25 @@
     .proof-link:hover { transform: translateY(-2px); }
     .proof-link svg { width: 13px; height: 13px; }
 
+    /* Custom Cursor */
+    .custom-cursor {
+      position: fixed;
+      top: 0; left: 0;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid var(--purple);
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: difference;
+    }
+    .custom-cursor.hover {
+      width: 34px; height: 34px;
+      background: rgba(83,74,183,0.2);
+    }
+    @media (hover: none) { body { cursor: auto; } .custom-cursor { display: none; } }
+
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -995,6 +896,9 @@
   </div>
 
   <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Custom Cursor -->
+  <div class="custom-cursor" id="customCursor"></div>
 
   <div class="lang-toggle">
     <button class="lang-btn active" data-lang="id">ID</button>
@@ -1037,7 +941,7 @@
           <div class="metal-btn-inner"></div>
           <span class="metal-btn" data-i18n="hero.cta1">lihat proyek saya</span>
         </a>
-        <a href="/CV%20Andika%20Said%20CDC.pdf" download="CV_Andika_Said.pdf" class="liquid-btn">
+        <a href="/CV%20Andika%20Said%20CDC.pdf" download="CV_Andika_Said.pdf" class="btn-outline">
           <span data-i18n="hero.cta2">unduh cv</span>
         </a>
       </div>
@@ -1085,168 +989,138 @@
       <div class="section-label" data-i18n="projects.label">portofolio</div>
       <div class="section-title" data-i18n="projects.title">proyek</div>
 
-      <div class="acc-hint" data-i18n="projects.hint">arahkan kursor untuk pratinjau</div>
-      <div class="accordion-wrap">
-
-        <div class="acc-card" data-open-proof="gs-medical-care" style="--acc-gradient: linear-gradient(135deg, #534AB7, #185FA5);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">01</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">GS</span>
-            <div class="acc-desc"><p>Sistem manajemen MCU &amp; rekam medis karyawan</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">GS Medical Care</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="chatbot-askmi" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #5DCAA5);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">02</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">AS</span>
-            <div class="acc-desc"><p>Platform manajemen bot Telegram untuk HIMMA</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Chatbot ASKMI</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="pmb-chatbot" style="--acc-gradient: linear-gradient(135deg, #D85A30, #BA7517);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">03</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">PM</span>
-            <div class="acc-desc"><p>Chatbot &amp; cek kelulusan PMB real-time</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">PMB Chatbot</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="inventory-dss" style="--acc-gradient: linear-gradient(135deg, #185FA5, #993556);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">04</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">DS</span>
-            <div class="acc-desc"><p>Decision Support System untuk kontrol stok</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Inventory DSS</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="laundry-system" style="--acc-gradient: linear-gradient(135deg, #993556, #534AB7);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">05</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">LS</span>
-            <div class="acc-desc"><p>Aplikasi Android manajemen laundry</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Laundry System</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-      </div>
-
       <div class="projects-grid">
 
-        <div class="project-card" data-proof="gs-medical-care">
-          <div class="proj-period">Mei – Okt 2025</div>
-          <div class="proj-company">PT GS Battery</div>
-          <div class="proj-title">GS Medical Care</div>
-          <div class="proj-desc" data-i18n="proj.gsmedical.desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">.NET MVC</span>
-            <span class="proj-tag">SQL Server</span>
-            <span class="proj-tag">OCR</span>
+        <!-- GS Medical Care -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="GS Medical Care, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="proj-period">Mei – Okt 2025</div>
+              <div class="proj-company">PT GS Battery</div>
+              <div class="proj-title">GS Medical Care</div>
+              <div class="proj-tags">
+                <span class="proj-tag">.NET MVC</span>
+                <span class="proj-tag">SQL Server</span>
+                <span class="proj-tag">OCR</span>
+              </div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="proj-title">GS Medical Care</div>
+                <div class="proj-desc">Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.</div>
+              </div>
+              <button class="proj-proof-btn" type="button" data-open-proof="gs-medical-care">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat bukti</span>
+              </button>
+            </div>
           </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="gs-medical-care">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
         </div>
 
-        <div class="project-card" data-proof="chatbot-askmi">
-          <div class="proj-period">Mei – Okt 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Chatbot ASKMI</div>
-          <div class="proj-desc" data-i18n="proj.askmi.desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Web</span>
-            <span class="proj-tag">Telegram API</span>
+        <!-- Chatbot ASKMI -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Chatbot ASKMI, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="proj-period">Mei – Okt 2025</div>
+              <div class="proj-company">Politeknik Astra</div>
+              <div class="proj-title">Chatbot ASKMI</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Web</span>
+                <span class="proj-tag">Telegram API</span>
+              </div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="proj-title">Chatbot ASKMI</div>
+                <div class="proj-desc">Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.</div>
+              </div>
+              <button class="proj-proof-btn" type="button" data-open-proof="chatbot-askmi">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat bukti</span>
+              </button>
+            </div>
           </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="chatbot-askmi">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
         </div>
 
-        <div class="project-card" data-proof="pmb-chatbot">
-          <div class="proj-period">Sep 2024 – Feb 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Chatbot & Cek Kelulusan PMB</div>
-          <div class="proj-desc" data-i18n="proj.pmb.desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Web</span>
-            <span class="proj-tag">Chatbot</span>
+        <!-- PMB Chatbot -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="PMB Chatbot, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="proj-period">Sep 2024 – Feb 2025</div>
+              <div class="proj-company">Politeknik Astra</div>
+              <div class="proj-title">Chatbot &amp; Cek Kelulusan PMB</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Web</span>
+                <span class="proj-tag">Chatbot</span>
+              </div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="proj-title">Chatbot &amp; Cek Kelulusan PMB</div>
+                <div class="proj-desc">Sistem web terintegrasi untuk memudahkan calon mahasiswa mengakses informasi dan memeriksa status kelulusan secara real-time.</div>
+              </div>
+              <button class="proj-proof-btn" type="button" data-open-proof="pmb-chatbot">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat bukti</span>
+              </button>
+            </div>
           </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="pmb-chatbot">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
         </div>
 
-        <div class="project-card" data-proof="inventory-dss">
-          <div class="proj-period">Ongoing 2026</div>
-          <div class="proj-company">PT Suryaraya Rubberindo Industries</div>
-          <div class="proj-title">Inventory Control DSS</div>
-          <div class="proj-desc" data-i18n="proj.dss.desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Python</span>
-            <span class="proj-tag">Streamlit</span>
-            <span class="proj-tag">DSS</span>
+        <!-- Inventory DSS -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Inventory DSS, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="proj-period">Ongoing 2026</div>
+              <div class="proj-company">PT Suryaraya Rubberindo Industries</div>
+              <div class="proj-title">Inventory Control DSS</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Python</span>
+                <span class="proj-tag">Streamlit</span>
+                <span class="proj-tag">DSS</span>
+              </div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="proj-title">Inventory Control DSS</div>
+                <div class="proj-desc">Decision Support System berbasis Python dan Streamlit untuk optimasi manajemen stok dan stabilitas produksi.</div>
+              </div>
+              <button class="proj-proof-btn" type="button" data-open-proof="inventory-dss">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat bukti</span>
+              </button>
+            </div>
           </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="inventory-dss">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
         </div>
 
-        <div class="project-card" data-proof="laundry-system">
-          <div class="proj-period">Mei – Jul 2025</div>
-          <div class="proj-company">Politeknik Astra</div>
-          <div class="proj-title">Laundry System</div>
-          <div class="proj-desc" data-i18n="proj.laundry.desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
-          <div class="proj-tags">
-            <span class="proj-tag">Android</span>
-            <span class="proj-tag">SQLite</span>
+        <!-- Laundry System -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Laundry System, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="proj-period">Mei – Jul 2025</div>
+              <div class="proj-company">Politeknik Astra</div>
+              <div class="proj-title">Laundry System</div>
+              <div class="proj-tags">
+                <span class="proj-tag">Android</span>
+                <span class="proj-tag">SQLite</span>
+              </div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="proj-title">Laundry System</div>
+                <div class="proj-desc">Aplikasi Android fungsional untuk manajemen layanan laundry dan transaksi menggunakan basis data lokal SQLite.</div>
+              </div>
+              <button class="proj-proof-btn" type="button" data-open-proof="laundry-system">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat bukti</span>
+              </button>
+            </div>
           </div>
-          <button class="proj-proof-btn" type="button" data-open-proof="laundry-system">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-            <span data-i18n="proj.viewProof">lihat bukti</span>
-          </button>
         </div>
 
       </div>
@@ -1261,18 +1135,18 @@
       <div class="skills-bento">
 
         <div class="skill-cat" data-size="lg">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-blue"></span><span data-i18n="skills.cat.frontend">Frontend</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-purple"></span><span data-i18n="skills.cat.frontend">Frontend</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-blue">HTML</span>
-            <span class="skill-tag st-blue">CSS</span>
+            <span class="skill-tag st-purple">HTML</span>
+            <span class="skill-tag st-purple">CSS</span>
             <span class="skill-tag st-purple">C#</span>
-            <span class="skill-tag st-amber">JavaScript</span>
-            <span class="skill-tag st-blue">TypeScript</span>
-            <span class="skill-tag st-teal">React</span>
-            <span class="skill-tag st-blue">Next.js</span>
-            <span class="skill-tag st-coral">Angular</span>
-            <span class="skill-tag st-pink">Svelte</span>
-            <span class="skill-tag st-teal">Tailwind CSS</span>
+            <span class="skill-tag st-purple">JavaScript</span>
+            <span class="skill-tag st-purple">TypeScript</span>
+            <span class="skill-tag st-purple">React</span>
+            <span class="skill-tag st-purple">Next.js</span>
+            <span class="skill-tag st-purple">Angular</span>
+            <span class="skill-tag st-purple">Svelte</span>
+            <span class="skill-tag st-purple">Tailwind CSS</span>
             <span class="skill-tag st-purple">Bootstrap</span>
           </div>
         </div>
@@ -1281,117 +1155,117 @@
           <div class="skill-cat-title"><span class="skill-cat-dot dot-purple"></span><span data-i18n="skills.cat.backend">Backend</span></div>
           <div class="skills-grid">
             <span class="skill-tag st-purple">PHP</span>
-            <span class="skill-tag st-teal">Laravel</span>
-            <span class="skill-tag st-blue">CodeIgniter</span>
+            <span class="skill-tag st-purple">Laravel</span>
+            <span class="skill-tag st-purple">CodeIgniter</span>
             <span class="skill-tag st-purple">C#</span>
             <span class="skill-tag st-purple">.NET / .NET Core / .NET MVC</span>
             <span class="skill-tag st-purple">ASP.NET</span>
-            <span class="skill-tag st-coral">Java</span>
-            <span class="skill-tag st-coral">Spring Boot</span>
-            <span class="skill-tag st-amber">Python</span>
-            <span class="skill-tag st-amber">Streamlit</span>
-            <span class="skill-tag st-teal">Node.js</span>
-            <span class="skill-tag st-teal">Express.js</span>
-            <span class="skill-tag st-teal">NestJS</span>
-            <span class="skill-tag st-pink">REST API</span>
+            <span class="skill-tag st-purple">Java</span>
+            <span class="skill-tag st-purple">Spring Boot</span>
+            <span class="skill-tag st-purple">Python</span>
+            <span class="skill-tag st-purple">Streamlit</span>
+            <span class="skill-tag st-purple">Node.js</span>
+            <span class="skill-tag st-purple">Express.js</span>
+            <span class="skill-tag st-purple">NestJS</span>
+            <span class="skill-tag st-purple">REST API</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="sm">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-teal"></span><span data-i18n="skills.cat.database">Database</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.database">Database</span></div>
           <div class="skills-grid">
             <span class="skill-tag st-teal">MySQL</span>
             <span class="skill-tag st-teal">SQL Server</span>
             <span class="skill-tag st-teal">SQLite</span>
-            <span class="skill-tag st-amber">Firebase Realtime DB/Firestore</span>
-            <span class="skill-tag st-purple">phpMyAdmin</span>
+            <span class="skill-tag st-teal">Firebase Realtime DB/Firestore</span>
+            <span class="skill-tag st-teal">phpMyAdmin</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="sm">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-coral"></span><span data-i18n="skills.cat.mobile">Mobile</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.mobile">Mobile</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-coral">Android (Java/Kotlin)</span>
-            <span class="skill-tag st-blue">Flutter</span>
+            <span class="skill-tag st-teal">Android (Java/Kotlin)</span>
+            <span class="skill-tag st-teal">Flutter</span>
             <span class="skill-tag st-teal">React Native</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="lg">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-amber"></span><span data-i18n="skills.cat.networking">Networking</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-teal"></span><span data-i18n="skills.cat.networking">Networking</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-purple">Networking Dasar</span>
-            <span class="skill-tag st-blue">TCP/IP</span>
-            <span class="skill-tag st-blue">Subnetting</span>
+            <span class="skill-tag st-teal">Networking Dasar</span>
+            <span class="skill-tag st-teal">TCP/IP</span>
+            <span class="skill-tag st-teal">Subnetting</span>
             <span class="skill-tag st-teal">VLAN</span>
             <span class="skill-tag st-teal">Routing & Switching</span>
-            <span class="skill-tag st-coral">Cisco (CCNA-level)</span>
-            <span class="skill-tag st-amber">MikroTik RouterOS</span>
-            <span class="skill-tag st-pink">PNETLab</span>
-            <span class="skill-tag st-pink">GNS3</span>
-            <span class="skill-tag st-purple">Wireshark</span>
-            <span class="skill-tag st-coral">Firewall</span>
-            <span class="skill-tag st-coral">VPN</span>
-            <span class="skill-tag st-amber">Cyber Security Dasar</span>
+            <span class="skill-tag st-teal">Cisco (CCNA-level)</span>
+            <span class="skill-tag st-teal">MikroTik RouterOS</span>
+            <span class="skill-tag st-teal">PNETLab</span>
+            <span class="skill-tag st-teal">GNS3</span>
+            <span class="skill-tag st-teal">Wireshark</span>
+            <span class="skill-tag st-teal">Firewall</span>
+            <span class="skill-tag st-teal">VPN</span>
+            <span class="skill-tag st-teal">Cyber Security Dasar</span>
             <span class="skill-tag st-teal">Linux Server</span>
-            <span class="skill-tag st-blue">DNS/DHCP</span>
+            <span class="skill-tag st-teal">DNS/DHCP</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="sm">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-pink"></span><span data-i18n="skills.cat.design">Design / UI</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.design">Design / UI</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-pink">Figma</span>
-            <span class="skill-tag st-blue">Canva</span>
-            <span class="skill-tag st-purple">Photoshop</span>
+            <span class="skill-tag st-teal">Figma</span>
+            <span class="skill-tag st-teal">Canva</span>
+            <span class="skill-tag st-teal">Photoshop</span>
             <span class="skill-tag st-teal">UI/UX Wireframing</span>
-            <span class="skill-tag st-amber">Prototyping</span>
+            <span class="skill-tag st-teal">Prototyping</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="lg">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-teal"></span><span data-i18n="skills.cat.editor">Editor / Tools</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.editor">Editor / Tools</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-purple">Visual Studio</span>
-            <span class="skill-tag st-blue">VS Code</span>
-            <span class="skill-tag st-coral">Android Studio</span>
-            <span class="skill-tag st-coral">IntelliJ IDEA</span>
-            <span class="skill-tag st-purple">Git</span>
-            <span class="skill-tag st-purple">GitHub</span>
-            <span class="skill-tag st-amber">Postman</span>
+            <span class="skill-tag st-teal">Visual Studio</span>
+            <span class="skill-tag st-teal">VS Code</span>
+            <span class="skill-tag st-teal">Android Studio</span>
+            <span class="skill-tag st-teal">IntelliJ IDEA</span>
+            <span class="skill-tag st-teal">Git</span>
+            <span class="skill-tag st-teal">GitHub</span>
+            <span class="skill-tag st-teal">Postman</span>
             <span class="skill-tag st-teal">XAMPP</span>
-            <span class="skill-tag st-blue">Vercel</span>
-            <span class="skill-tag st-blue">Netlify</span>
-            <span class="skill-tag st-pink">Jira</span>
-            <span class="skill-tag st-pink">Trello</span>
-            <span class="skill-tag st-amber">Notion</span>
+            <span class="skill-tag st-teal">Vercel</span>
+            <span class="skill-tag st-teal">Netlify</span>
+            <span class="skill-tag st-teal">Jira</span>
+            <span class="skill-tag st-teal">Trello</span>
+            <span class="skill-tag st-teal">Notion</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="lg">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-blue"></span><span data-i18n="skills.cat.office">Office</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.office">Office</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-purple">Microsoft Word</span>
+            <span class="skill-tag st-teal">Microsoft Word</span>
             <span class="skill-tag st-teal">Microsoft Excel</span>
-            <span class="skill-tag st-coral">Microsoft PowerPoint</span>
-            <span class="skill-tag st-blue">Microsoft Outlook</span>
-            <span class="skill-tag st-amber">Microsoft Access</span>
-            <span class="skill-tag st-blue">Google Docs</span>
-            <span class="skill-tag st-amber">Google Sheets</span>
-            <span class="skill-tag st-pink">Google Slides</span>
+            <span class="skill-tag st-teal">Microsoft PowerPoint</span>
+            <span class="skill-tag st-teal">Microsoft Outlook</span>
+            <span class="skill-tag st-teal">Microsoft Access</span>
+            <span class="skill-tag st-teal">Google Docs</span>
+            <span class="skill-tag st-teal">Google Sheets</span>
+            <span class="skill-tag st-teal">Google Slides</span>
             <span class="skill-tag st-teal">Google Forms</span>
-            <span class="skill-tag st-coral">Power BI</span>
+            <span class="skill-tag st-teal">Power BI</span>
           </div>
         </div>
 
         <div class="skill-cat" data-size="sm">
-          <div class="skill-cat-title"><span class="skill-cat-dot dot-coral"></span><span data-i18n="skills.cat.data">Data / Analyst</span></div>
+          <div class="skill-cat-title"><span class="skill-cat-dot dot-gray"></span><span data-i18n="skills.cat.data">Data / Analyst</span></div>
           <div class="skills-grid">
-            <span class="skill-tag st-amber">Pandas</span>
-            <span class="skill-tag st-amber">NumPy</span>
-            <span class="skill-tag st-coral">Power BI</span>
+            <span class="skill-tag st-teal">Pandas</span>
+            <span class="skill-tag st-teal">NumPy</span>
+            <span class="skill-tag st-teal">Power BI</span>
             <span class="skill-tag st-teal">Streamlit Dashboard</span>
-            <span class="skill-tag st-blue">Basic Data Visualization</span>
+            <span class="skill-tag st-teal">Basic Data Visualization</span>
           </div>
         </div>
 
@@ -1434,174 +1308,162 @@
       <div class="section-label" data-i18n="certs.label">sertifikasi</div>
       <div class="section-title" data-i18n="certs.title">pelatihan & sertifikat</div>
 
-      <div class="acc-hint" data-i18n="certs.hint">arahkan kursor untuk pratinjau</div>
-
-      <div class="accordion-wrap">
-        <div class="acc-card" data-open-proof="cert-network-fundamental" style="--acc-gradient: linear-gradient(135deg, #534AB7, #185FA5);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">01</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">NF</span>
-            <div class="acc-desc"><p>Network Fundamental — Aguna Course</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Network Fundamental</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="cert-pnetlab" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #5DCAA5);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">02</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">PL</span>
-            <div class="acc-desc"><p>Simulasi Jaringan dengan PNETLab</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">PNETLab</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="cert-mikrotik" style="--acc-gradient: linear-gradient(135deg, #BA7517, #D85A30);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">03</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">MT</span>
-            <div class="acc-desc"><p>MikroTik Certified Network Associate</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">MikroTik CNA</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="cert-vm-fundamental" style="--acc-gradient: linear-gradient(135deg, #185FA5, #993556);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">04</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">VM</span>
-            <div class="acc-desc"><p>Virtual Machine Fundamental</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">VM Fundamental</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="accordion-wrap" style="margin-top: -18px;">
-        <div class="acc-card" data-open-proof="cert-oop" style="--acc-gradient: linear-gradient(135deg, #993556, #534AB7);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">05</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">OOP</span>
-            <div class="acc-desc"><p>Object-Oriented Programming</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">OOP</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="cert-cisco" style="--acc-gradient: linear-gradient(135deg, #D85A30, #BA7517);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">06</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">CS</span>
-            <div class="acc-desc"><p>Cisco Fundamental</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Cisco Fundamental</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-
-        <div class="acc-card" data-open-proof="cert-cybersecurity" style="--acc-gradient: linear-gradient(135deg, #0F6E56, #185FA5);">
-          <div class="acc-bg"></div>
-          <div class="acc-top">
-            <span class="acc-num">07</span>
-            <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
-          <div class="acc-center">
-            <span class="acc-icon">CY</span>
-            <div class="acc-desc"><p>Cyber Security Dasar</p></div>
-          </div>
-          <div class="acc-bottom">
-            <div class="acc-title">Cyber Security</div>
-            <div class="acc-bar"><div class="acc-bar-fill"></div></div>
-          </div>
-        </div>
-      </div>
-
       <div class="cert-grid">
-        <div class="cert-card" data-proof="cert-network-fundamental">
-          <div class="cert-name">Network Fundamental</div>
-          <div class="cert-org">Aguna Course</div>
-          <div class="cert-date">Sep 2025 · AC-555-23291893-72</div>
-          <div class="cert-skills"><span class="cert-skill">Pengelolaan Jaringan</span><span class="cert-skill">Network Simulation</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- Network Fundamental -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Network Fundamental, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Network Fundamental</div>
+              <div class="cert-org">Aguna Course</div>
+              <div class="cert-date">Sep 2025 · AC-555-23291893-72</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Network Fundamental</div>
+                <div class="cert-skills"><span class="cert-skill">Pengelolaan Jaringan</span><span class="cert-skill">Network Simulation</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-network-fundamental">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-pnetlab">
-          <div class="cert-name">Simulasi Jaringan dengan PNETLab</div>
-          <div class="cert-org">Aguna Course</div>
-          <div class="cert-date">Sep 2025 · AC-468-37822727-88</div>
-          <div class="cert-skills"><span class="cert-skill">PNETLab</span><span class="cert-skill">Network Simulation</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- PNETLab -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="PNETLab, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Simulasi Jaringan dengan PNETLab</div>
+              <div class="cert-org">Aguna Course</div>
+              <div class="cert-date">Sep 2025 · AC-468-37822727-88</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Simulasi Jaringan dengan PNETLab</div>
+                <div class="cert-skills"><span class="cert-skill">PNETLab</span><span class="cert-skill">Network Simulation</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-pnetlab">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-mikrotik">
-          <div class="cert-name">MikroTik Certified Network Associate</div>
-          <div class="cert-org">MikroTik</div>
-          <div class="cert-date">Des 2025 – Des 2028 · 2512NA1105</div>
-          <div class="cert-skills"><span class="cert-skill">Jaringan Komputer</span><span class="cert-skill">MikroTik RouterOS</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- MikroTik CNA -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="MikroTik CNA, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">MikroTik Certified Network Associate</div>
+              <div class="cert-org">MikroTik</div>
+              <div class="cert-date">Des 2025 – Des 2028 · 2512NA1105</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">MikroTik Certified Network Associate</div>
+                <div class="cert-skills"><span class="cert-skill">Jaringan Komputer</span><span class="cert-skill">MikroTik RouterOS</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-mikrotik">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-vm-fundamental">
-          <div class="cert-name">Virtual Machine Fundamental</div>
-          <div class="cert-org">Aguna Course</div>
-          <div class="cert-date">Sep 2025 – Jan 2028</div>
-          <div class="cert-skills"><span class="cert-skill">Virtual Machine</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- VM Fundamental -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="VM Fundamental, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Virtual Machine Fundamental</div>
+              <div class="cert-org">Aguna Course</div>
+              <div class="cert-date">Sep 2025 – Jan 2028</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Virtual Machine Fundamental</div>
+                <div class="cert-skills"><span class="cert-skill">Virtual Machine</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-vm-fundamental">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-oop">
-          <div class="cert-name">Object-Oriented Programming (OOP)</div>
-          <div class="cert-org">ID-Networkers (IDN.ID)</div>
-          <div class="cert-date">Sep 2025 – Sep 2028</div>
-          <div class="cert-skills"><span class="cert-skill">OOP</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- OOP -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="OOP, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Object-Oriented Programming (OOP)</div>
+              <div class="cert-org">ID-Networkers (IDN.ID)</div>
+              <div class="cert-date">Sep 2025 – Sep 2028</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Object-Oriented Programming (OOP)</div>
+                <div class="cert-skills"><span class="cert-skill">OOP</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-oop">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-cisco">
-          <div class="cert-name">Cisco Fundamental</div>
-          <div class="cert-org">ID-Networkers (IDN.ID)</div>
-          <div class="cert-date">Sep 2025 – Sep 2028</div>
-          <div class="cert-skills"><span class="cert-skill">Cisco Fundamental</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- Cisco Fundamental -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Cisco Fundamental, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Cisco Fundamental</div>
+              <div class="cert-org">ID-Networkers (IDN.ID)</div>
+              <div class="cert-date">Sep 2025 – Sep 2028</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Cisco Fundamental</div>
+                <div class="cert-skills"><span class="cert-skill">Cisco Fundamental</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-cisco">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div class="cert-card" data-proof="cert-cybersecurity">
-          <div class="cert-name">Cyber Security</div>
-          <div class="cert-org">ID-Networkers (IDN.ID)</div>
-          <div class="cert-date">Sep 2025 – Sep 2028</div>
-          <div class="cert-skills"><span class="cert-skill">Cyber Security</span></div>
-          <div class="cert-view"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><span data-i18n="certs.viewCert">lihat sertifikat</span></div>
+
+        <!-- Cyber Security -->
+        <div class="flip-card" tabindex="0" role="button" aria-label="Cyber Security, klik untuk detail">
+          <div class="flip-card-inner">
+            <div class="flip-face flip-front">
+              <div class="cert-name">Cyber Security</div>
+              <div class="cert-org">ID-Networkers (IDN.ID)</div>
+              <div class="cert-date">Sep 2025 – Sep 2028</div>
+              <div class="flip-hint">klik untuk lihat detail</div>
+            </div>
+            <div class="flip-face flip-back">
+              <div>
+                <div class="cert-name">Cyber Security</div>
+                <div class="cert-skills"><span class="cert-skill">Cyber Security</span></div>
+              </div>
+              <button class="cert-view" data-open-proof="cert-cybersecurity">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+                <span>lihat sertifikat</span>
+              </button>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </section>
@@ -1866,11 +1728,80 @@
     })();
 
 
-    document.querySelectorAll('.metal-btn-wrapper').forEach(btn => {
-      btn.addEventListener('mousedown',  () => { btn.style.transform = 'translateY(2px) scale(0.99)'; btn.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)'; });
-      btn.addEventListener('mouseup',    () => { btn.style.transform = ''; btn.style.boxShadow = ''; });
-      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; btn.style.boxShadow = ''; });
-    });
+    /* Magnetic Button + Active state combined */
+    (function () {
+      const isTouchDevice = window.matchMedia('(hover: none)').matches;
+      const btns = document.querySelectorAll('.hero-btns > a');
+      
+      btns.forEach(btn => {
+        // Magnetic effect
+        if (!isTouchDevice) {
+          btn.addEventListener('mousemove', e => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
+          });
+          btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+          });
+        }
+
+        // Active state (scale on click) - keep existing behavior
+        btn.addEventListener('mousedown', () => {
+          if (btn.classList.contains('metal-btn-wrapper')) {
+            btn.style.transform = 'translateY(2px) scale(0.99)';
+            btn.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)';
+          }
+        });
+        btn.addEventListener('mouseup', () => {
+          if (btn.classList.contains('metal-btn-wrapper')) {
+            btn.style.transform = '';
+            btn.style.boxShadow = '';
+          }
+        });
+        btn.addEventListener('mouseleave', () => {
+          if (btn.classList.contains('metal-btn-wrapper')) {
+            btn.style.transform = '';
+            btn.style.boxShadow = '';
+          }
+        });
+      });
+    })();
+
+
+    /* Flip Card */
+    (function () {
+      document.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('click', e => {
+          if (e.target.closest('[data-open-proof]') || e.target.closest('.cert-view')) return;
+          card.classList.toggle('flipped');
+        });
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.classList.toggle('flipped');
+          }
+        });
+      });
+    })();
+
+
+    /* Custom Cursor */
+    (function () {
+      const isTouchDevice = window.matchMedia('(hover: none)').matches;
+      if (isTouchDevice) return;
+
+      const cursor = document.getElementById('customCursor');
+      window.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+      });
+      document.querySelectorAll('a, button, .flip-card, .cert-card, .bento-cell, .skill-cat, .edu-card, .exp-item').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+    })();
 
 
     const PROOF_DATA = {
@@ -2088,9 +2019,6 @@
           openProof(btn.dataset.openProof);
         });
       });
-      document.querySelectorAll('.cert-card[data-proof]').forEach(card => {
-        card.addEventListener('click', () => openProof(card.dataset.proof));
-      });
 
       closeBtn.addEventListener('click', closeProof);
       overlay.addEventListener('click', e => { if (e.target === overlay) closeProof(); });
@@ -2153,7 +2081,7 @@
 
 
     (function () {
-      const cards = document.querySelectorAll('.project-card');
+      const cards = document.querySelectorAll('.flip-card');
       const isTouchDevice = window.matchMedia('(hover: none)').matches;
       if (isTouchDevice) return;
 
@@ -2166,17 +2094,21 @@
           const centerY = rect.height / 2;
           const rotateX = ((y - centerY) / centerY) * -6;
           const rotateY = ((x - centerX) / centerX) * 6;
-          card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+          if (!card.classList.contains('flipped')) {
+            card.querySelector('.flip-card-inner').style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          }
         });
         card.addEventListener('mouseleave', () => {
-          card.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) translateY(0)';
+          if (!card.classList.contains('flipped')) {
+            card.querySelector('.flip-card-inner').style.transform = '';
+          }
         });
       });
     })();
 
 
     (function () {
-      const cats = document.querySelectorAll('.skill-cat, #skills .skills-grid');
+      const cats = document.querySelectorAll('.skill-cat');
       const obs = new IntersectionObserver(entries => {
         entries.forEach(entry => {
           if (!entry.isIntersecting) return;
@@ -2188,7 +2120,7 @@
         });
       }, { threshold: 0.2 });
 
-      document.querySelectorAll('.skill-cat').forEach(cat => obs.observe(cat));
+      cats.forEach(cat => obs.observe(cat));
     })();
 
 
@@ -2225,7 +2157,6 @@
 
       'projects.label': { id: 'portofolio', en: 'portfolio' },
       'projects.title': { id: 'proyek', en: 'projects' },
-      'projects.hint': { id: 'arahkan kursor untuk pratinjau', en: 'hover to preview' },
       'proj.viewProof': { id: 'lihat bukti', en: 'view proof' },
       'proj.gsmedical.desc': { id: 'Aplikasi web manajemen MCU dan rekam medis karyawan dengan fitur OCR, unggahan Excel, dan dasbor analitik kesehatan interaktif.', en: 'A web app for employee MCU and medical record management, featuring OCR, Excel uploads, and an interactive health analytics dashboard.' },
       'proj.askmi.desc': { id: 'Platform manajemen bot Telegram berbasis web dengan penjadwalan pesan kustom, skenario interaktif, dan otomasi kegiatan organisasi.', en: 'A web-based Telegram bot management platform with custom message scheduling, interactive scenarios, and organization activity automation.' },
@@ -2242,7 +2173,6 @@
 
       'certs.label': { id: 'sertifikasi', en: 'certifications' },
       'certs.title': { id: 'pelatihan & sertifikat', en: 'training & certificates' },
-      'certs.hint': { id: 'arahkan kursor untuk pratinjau', en: 'hover to preview' },
       'certs.viewCert': { id: 'lihat sertifikat', en: 'view certificate' },
 
       'edu.label': { id: 'pendidikan', en: 'education' },
